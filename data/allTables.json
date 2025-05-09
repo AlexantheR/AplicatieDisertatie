@@ -1,0 +1,112 @@
+{
+    "tables": [
+        {
+            "name": "Masa 1",
+            "capacity": 5,
+            "isAvailable": true,
+            "location": "Interior"
+        },
+        {
+            "name": "Masa 2",
+            "capacity": 4,
+            "isAvailable": true,
+            "location": "Bar"
+        },
+        {
+            "name": "Masa 3",
+            "capacity": 5,
+            "isAvailable": true,
+            "location": "Interior"
+        },
+        {
+            "name": "Masa 4",
+            "capacity": 3,
+            "isAvailable": true,
+            "location": "Terasa"
+        },
+        {
+            "name": "Masa 5",
+            "capacity": 5,
+            "isAvailable": true,
+            "location": "Terasa"
+        },
+        {
+            "name": "Masa 6",
+            "capacity": 6,
+            "isAvailable": true,
+            "location": "Interior"
+        },
+        {
+            "name": "Masa 7",
+            "capacity": 5,
+            "isAvailable": true,
+            "location": "Terasa"
+        },
+        {
+            "name": "Masa 8",
+            "capacity": 3,
+            "isAvailable": true,
+            "location": "Interior"
+        },
+        {
+            "name": "Masa 9",
+            "capacity": 4,
+            "isAvailable": true,
+            "location": "Bar"
+        },
+        {
+            "name": "Masa 10",
+            "capacity": 7,
+            "isAvailable": true,
+            "location": "Interior"
+        },
+        {
+            "name": "Masa 11",
+            "capacity": 7,
+            "isAvailable": true,
+            "location": "Bar"
+        },
+        {
+            "name": "Masa 12",
+            "capacity": 5,
+            "isAvailable": true,
+            "location": "Bar"
+        },
+        {
+            "name": "Masa 13",
+            "capacity": 2,
+            "isAvailable": true,
+            "location": "Terasa"
+        },
+        {
+            "name": "Masa 14",
+            "capacity": 3,
+            "isAvailable": true,
+            "location": "Interior"
+        },
+        {
+            "name": "Masa 15",
+            "capacity": 6,
+            "isAvailable": true,
+            "location": "Terasa"
+        },
+        {
+            "name": "Masa 16",
+            "capacity": 7,
+            "isAvailable": true,
+            "location": "Terasa"
+        },
+        {
+            "name": "Masa 17",
+            "capacity": 6,
+            "isAvailable": true,
+            "location": "Terasa"
+        },
+        {
+            "name": "Masa 18",
+            "capacity": 2,
+            "isAvailable": true,
+            "location": "Terasa"
+        }
+    ]
+}

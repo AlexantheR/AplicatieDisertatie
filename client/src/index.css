@@ -1,0 +1,557 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Raleway', sans-serif !important;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #e74646 !important;
+}
+
+
+
+.navbarButtons {
+  display: flex !important;
+}
+
+.navbarPageLinks {
+  display: inline-flex !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+
+
+.nav-link {
+  /* color: #f7d3ae !important; */
+  color: white !important;
+}
+
+.nav-link:hover {
+  color: #2B2E4A !important;
+}
+
+.navbar-brand {
+  color: #FFF3E2 !important;
+}
+
+#dropdownMenuLink {
+  color: white !important;
+}
+
+/* 
+
+
+
+.nav-buttons{
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  grid-gap: 20px !important;
+  margin-left:auto;
+  margin-right: auto;
+}
+
+.nav-link {
+  color: #FFF3E2 !important;
+}
+
+.navbar-toggler-icon{
+  color: #FFF3E2 !important;
+}
+
+
+} */
+
+
+h1 {
+  font-size: 20px !important;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.drink-grid-container {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-gap: 20px !important;
+}
+
+.btnAdd {
+  background-color: #E74646 !important;
+  color: white !important;
+}
+
+select {
+  box-shadow: none !important;
+  border-color: black !important;
+}
+
+.fa-plus {
+  color: green;
+  margin: 5px;
+
+}
+
+.fa-minus {
+  color: #E74646;
+  margin: 5px;
+}
+
+.fa-trash {
+  color: #E74646;
+  margin: 5px;
+}
+
+input {
+  margin-top: 10px !important;
+  box-shadow: none !important;
+}
+
+.btnRegister {
+  background-color: #E74646 !important;
+  color: white !important;
+  display: flex;
+}
+
+.btnLogin {
+  background-color: #E74646 !important;
+  color: white !important;
+  display: flex;
+}
+
+.btnPayNow {
+  background-color: #E74646 !important;
+  color: white !important;
+}
+
+.btnSendToPayment {
+  background-color: #E74646 !important;
+  color: white !important;
+  border-radius: 5px !important;
+  border-color: black !important;
+}
+
+.btnFilter {
+  background-color: #E74646 !important;
+  color: white !important;
+}
+
+.btnDeliver {
+  background-color: #E74646 !important;
+  color: white !important;
+}
+
+.btnEdit {
+  background-color: #E74646 !important;
+  color: white !important;
+}
+
+.btnModal {
+  background-color: #E74646 !important;
+  color: white !important;
+}
+
+
+.registerLoginLink {
+  color: black;
+  display: flex;
+}
+
+.login {
+  background-image: url('./images/b1.svg');
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  height: 90vh;
+}
+
+.register {
+  background-image: url('./images/b2.svg');
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  height: 90vh;
+}
+
+.adminfunctions {
+  padding: 10px;
+  background-color: rgb(1, 1, 77);
+}
+
+.adminfunctions li {
+  list-style-type: none !important;
+  display: inline !important;
+  color: white !important;
+}
+
+.adminfunctions li a {
+  color: white !important;
+  padding: 20px;
+}
+
+td,
+th,
+tr {
+  text-align: left;
+}
+
+.responsiveImg {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin-top: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.responsiveImg:hover {
+  color: #e74c3c;
+  background-color: white !important;
+  border: 3px solid #2B2E4A !important;
+  box-shadow: #2B2E4A;
+}
+
+#voucher-apply {
+  color: #8fc39b !important;
+  margin-top: 8px;
+}
+
+.pizza-slice {
+  font-size: 1.2rem;
+  padding-left: 1.25%;
+  color: #e74c3c;
+}
+
+.pizza-cta {
+  padding-top: 2%;
+}
+
+.looking-for-pizza {
+  font-size: 2.5rem;
+  padding-right: 3%;
+  padding-left: 3%;
+}
+
+.book-table-btn {
+  color: white;
+  font-size: 1.2rem;
+  padding: 2% 8%;
+  border-radius: 25px;
+  background-color: #e74c3c;
+  border: 2px white solid;
+  font-family: ABeeZee, sans-serif;
+}
+
+.book-table-btn:hover {
+  background-color: #ff8500;
+}
+
+@media (min-width: 768px) {
+  .book-table-btn {
+    font-size: 1.4rem;
+    padding: 0.5% 5%;
+  }
+}
+
+.big-img-container {
+  padding: 10% 0;
+}
+
+@media (min-width: 768px) {
+  .big-img-container {
+    padding: 4% 0;
+  }
+}
+
+.big-img {
+  width: 96%;
+  border-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.selected-table {
+  font-size: 1.25rem;
+  padding-bottom: 2%;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  display: none;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+  -webkit-appearance: none;
+  display: none;
+}
+
+#booking-dropdown {
+  width: 85%;
+  padding: 4% 0;
+  background-color: #e74c3c;
+  color: white;
+  margin: 2% 0;
+  font-family: "Roboto";
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#booking-dropdown:hover {
+  color: #e74c3c;
+  background-color: white !important;
+  border: 2px solid #e74c3c !important;
+}
+
+#booking-dropdown:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#booking-dropdown-menu {
+  outline: none;
+}
+
+#booking-dropdown-item:hover {
+  background-color: white;
+}
+
+#booking-dropdown-item:active {
+  background-color: white;
+  color: black;
+}
+
+@media (min-width: 768px) {
+  #booking-dropdown {
+    font-size: 1.2rem;
+  }
+}
+
+.tables-display {
+  background-color: #e74c3c;
+  margin: auto;
+  border-radius: 25px;
+  max-width: 100%;
+  height: calc(300px);
+  /* Adjust the height based on your requirements */
+  width: 90%;
+  /* Adjust the width as needed */
+  overflow: auto;
+}
+
+.table-container {
+  margin: 0 1%;
+}
+
+
+@media (min-width: 768px) {
+  .tables-display {
+    margin: 6% 2.5%;
+  }
+}
+
+.table-display-message {
+  padding: 2% 0;
+  text-align: center;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.table-key {
+  padding: 1% 0;
+  color: white;
+}
+
+.available-tables {
+  color: white;
+  font-size: 1.2rem;
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  /* Align the text in the center */
+  margin: 0 auto;
+  /* Center the element horizontally */
+}
+
+.wrong-time {
+  color: white;
+  font-size: 1.2rem;
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  /* Align the text in the center */
+  margin: 0 auto;
+  /* Center the element horizontally */
+  padding-top: 5%;
+}
+
+
+
+.table {
+  background-color: rgba(245, 246, 250, 0.4);
+  padding: 15px;
+  border-radius: 25px;
+  min-width: 80px;
+}
+
+.table-row {
+  margin-bottom: 8px;
+}
+
+.selectable-table:hover {
+  cursor: pointer;
+}
+
+.selectable-table:hover-row {
+  padding: 5px;
+}
+
+.full-table {
+  background-color: white;
+  border: solid 2px white;
+  border-radius: 50%;
+  padding: 1px 10px;
+  margin: 3px;
+}
+
+.empty-table {
+  background-color: #e74c3c;
+  border: solid 2px white;
+  border-radius: 50%;
+  padding: 1px 10px;
+  margin: 3px;
+}
+
+.table-name {
+  color: white;
+  font-size: 0.8rem;
+  padding-top: 15px;
+  font-family: Roboto, sans-serif;
+}
+
+
+.reservation-details-container {
+  padding: 0 4%;
+  padding-bottom: 5%;
+}
+
+.reservation-details {
+  margin: 0 2%;
+  margin-bottom: 5%;
+}
+
+@media (min-width: 768px) {
+  .reservation-details {
+    margin-bottom: 0;
+  }
+}
+
+.reservation-input:focus {
+  border-color: black;
+  box-shadow: 0 0;
+}
+
+.reservation-error {
+  color: #c0392b;
+  font-size: 1.1rem;
+  padding-bottom: 3%;
+}
+
+.thanks-header {
+  padding: 5% 0;
+  padding-top: 10%;
+  font-size: 2.5rem;
+}
+
+.thanks-subtext {
+  font-size: 1.2rem;
+  padding: 2%;
+}
+
+.thank-you-pizza {
+  font-size: 4rem;
+  color: #e74c3c;
+  padding-bottom: 8%;
+}
+
+@media (min-width: 768px) {
+  .thanks-header {
+    font-size: 5.5rem;
+  }
+
+  .thanks-subtext {
+    font-size: 2.2rem;
+  }
+
+  .thank-you-pizza {
+    font-size: 7rem;
+    padding-bottom: 4%;
+  }
+}
+
+.reservation-wrapper {
+  margin-top: -10px;
+  /* Adjust the top margin as needed */
+  margin-bottom: -10px;
+  /* Adjust the bottom margin as needed */
+}
+
+.reservation-row {
+  margin-top: -10px;
+  /* Adjust the top margin as needed */
+  margin-bottom: -10px;
+  /* Adjust the bottom margin as needed */
+}
+
+.chart-container {
+  height: 400px; /* Adjust the height as needed */
+  width: 55%;
+  float: left;
+}
+
+.piechart-container {
+  height: 400px; /* Adjust the height as needed */
+  width: 45%;
+  float: left;
+}
+
+
+.motiv-premium {
+  text-align: justify;
+  text-indent: 40px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  margin-right: 5px;
+}
+
+.discounted-price {
+  color: #e74c3c;
+}
+
+.procent-reducere{
+  color: #e74c3c;
+  font-size: 0.9rem;
+}
+
+.total-comenzi{
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: left;
+  text-indent: 80px;
+}
