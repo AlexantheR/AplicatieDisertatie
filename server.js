@@ -13,12 +13,10 @@ var logger = require('morgan');
 var cors = require('cors');
 
 app.use(express.json());
-app.use(cors(
-    {
-        origin: "aplicatie-disertatie.vercel.app",
-        credentials: true,
-    }
-));
+app.use(cors({
+  origin: true, // <- permite orice origine specificată de browser
+  credentials: true
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
