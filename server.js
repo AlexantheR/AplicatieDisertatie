@@ -15,7 +15,7 @@ var cors = require('cors');
 app.use(express.json());
 app.use(cors(
     {
-        origin: "aplicatie-disertatie-git-main-alexanthers-projects.vercel.app",
+        origin: "aplicatie-disertatie.vercel.app",
         credentials: true,
     }
 ));
