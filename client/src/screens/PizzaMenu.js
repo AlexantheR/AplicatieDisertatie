@@ -14,6 +14,8 @@ export default function PizzaMenu() {
 
   const { pizzas, error, loading } = pizzasstate;
 
+console.log("PizzaMenu loaded");
+
   useEffect(() => {
     dispatch(getAllPizzas());
   }, [])

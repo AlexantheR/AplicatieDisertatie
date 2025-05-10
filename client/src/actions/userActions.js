@@ -1,8 +1,8 @@
 import axios from "axios"
-
-const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-});
+import api from "../axiosInstance";
+// const api = axios.create({
+//   baseURL: process.env.REACT_APP_API_URL,
+// });
 
 
 export const checkEmailAvailability = (email) => async (dispatch) => {

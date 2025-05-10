@@ -12,6 +12,8 @@ export const getAllPizzas = () => async dispatch => {
     // const response = await axios.get("/api/pizzas/getallpizzas");
     const response = await api.get("/api/pizzas/getallpizzas");
     console.log(response);
+    console.log("raspuns api pizzas", response.data);
+    console.log("BASE URL:", process.env.REACT_APP_API_URL);
     dispatch({ type: "GET_PIZZAS_SUCCESS", payload: response.data });
   } catch (error) {
     dispatch({ type: "GET_PIZZAS_FAILED", payload: error });
