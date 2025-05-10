@@ -15,7 +15,7 @@ var cors = require('cors');
 app.use(express.json());
 app.use(cors(
     {
-        origin: "https://aplicatie-disertatie-fpmjf8jgo-alexanthers-projects.vercel.app/",
+        origin: "https://aplicatie-disertatie.vercel.app",
     }
 ));
 app.use(logger('dev'));
