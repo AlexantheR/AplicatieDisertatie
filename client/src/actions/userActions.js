@@ -1,10 +1,16 @@
 import axios from "axios"
 
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+});
+
+
 export const checkEmailAvailability = (email) => async (dispatch) => {
     try {
         dispatch({ type: 'CHECK_EMAIL_REQUEST' });
 
-        const response = await axios.get(`/api/users/checkemail?email=${email}`);
+        // const response = await axios.get(`/api/users/checkemail?email=${email}`);
+        const response = await api.get(`/api/users/checkemail?email=${email}`);
         const unique = response.data.unique;
 
         dispatch({ type: 'CHECK_EMAIL_SUCCESS', payload: unique });
@@ -22,7 +28,8 @@ export const registerUser = (user) => async dispatch => {
     dispatch({ type: 'USER_REGISTER_REQUEST' })
 
     try {
-        const response = axios.post('/api/users/register', user)
+        // const response = axios.post('/api/users/register', user)
+        const response = await api.post('/api/users/register', user)
         console.log(response)
         dispatch({ type: 'USER_REGISTER_SUCCESS' })
     } catch (error) {
@@ -36,7 +43,8 @@ export const loginUser = (user) => async dispatch => {
     dispatch({ type: 'USER_LOGIN_REQUEST' })
 
     try {
-        const response = await axios.post('/api/users/login', user)
+        // const response = await axios.post('/api/users/login', user)
+        const response = await api.post('/api/users/login', user)
         console.log(response)
         dispatch({ type: 'USER_LOGIN_SUCCESS', payload: response.data })
         localStorage.setItem('currentUser', JSON.stringify(response.data))
@@ -58,7 +66,8 @@ export const getAllUsers = () => async dispatch => {
     dispatch({ type: 'GET_USERS_REQUEST' })
 
     try {
-        const response = await axios.get('/api/users/getallusers')
+        // const response = await axios.get('/api/users/getallusers')
+        const response = await api.get('/api/users/getallusers')
         console.log(response);
         dispatch({ type: 'GET_USERS_SUCCESS', payload: response.data })
 
@@ -71,7 +80,8 @@ export const getAllUsers = () => async dispatch => {
 export const deleteUser = (userid) => async dispatch => {
 
     try {
-        await axios.post('/api/users/deleteuser', { userid })
+        // await axios.post('/api/users/deleteuser', { userid })
+        await api.post('/api/users/deleteuser', { userid })
         alert('Utilizator sters cu succes!')
         window.location.reload()
     } catch (error) {
@@ -85,7 +95,8 @@ export const makeUserPremium = (email) => async (dispatch) => {
     dispatch({ type: 'MAKE_USER_PREMIUM_REQUEST' });
 
     try {
-        const response = await axios.post('/api/users/makeuserpremium', { email });
+        // const response = await axios.post('/api/users/makeuserpremium', { email });
+        const response = await api.post('/api/users/makeuserpremium', { email });
         console.log(response);
         dispatch({ type: 'MAKE_USER_PREMIUM_SUCCESS', payload: response.data });
 
@@ -112,7 +123,8 @@ export const loseUserPremium = (email) => async (dispatch) => {
     dispatch({ type: 'LOSE_USER_PREMIUM_REQUEST' });
 
     try {
-        const response = await axios.post('/api/users/loseuserpremium', { email });
+        // const response = await axios.post('/api/users/loseuserpremium', { email });
+        const response = await api.post('/api/users/loseuserpremium', { email });
         console.log(response);
         dispatch({ type: 'LOSE_USER_PREMIUM_SUCCESS', payload: response.data });
 

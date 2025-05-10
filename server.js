@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const db = require('./db');
 const app = express();
@@ -14,7 +15,7 @@ var cors = require('cors');
 app.use(express.json());
 app.use(cors(
     {
-        origin: "https://vercel.com/alexanthers-projects/aplicatie-disertatie/9XHD6K5qXHnS7ZaZ5TpesambAXEZ",
+        origin: "https://aplicatie-disertatie-fpmjf8jgo-alexanthers-projects.vercel.app/",
     }
 ));
 app.use(logger('dev'));

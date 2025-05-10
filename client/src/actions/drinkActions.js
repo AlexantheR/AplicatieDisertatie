@@ -1,11 +1,17 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+});
+
+
 export const getAllDrinks = () => async dispatch => {
     dispatch({ type: "GET_DRINKS_REQUEST" });
 
     try {
-        const response = await axios.get("/api/drinks/getalldrinks");
+        // const response = await axios.get("/api/drinks/getalldrinks");
+        const response = await api.get("/api/drinks/getalldrinks");
         console.log(response);
         dispatch({ type: "GET_DRINKS_SUCCESS", payload: response.data });
     } catch (error) {
@@ -17,7 +23,8 @@ export const getDrinkById = (drinkid) => async dispatch => {
     dispatch({ type: 'GET_DRINKBYID_REQUEST' })
 
     try {
-        const response = await axios.post("/api/drinks/getdrinkbyid", { drinkid });
+        // const response = await axios.post("/api/drinks/getdrinkbyid", { drinkid });
+        const response = await api.post("/api/drinks/getdrinkbyid", { drinkid });
         console.log(response);
         dispatch({ type: "GET_DRINKBYID_SUCCESS", payload: response.data });
     } catch (error) {
@@ -30,7 +37,8 @@ export const filterDrinks = (searchkey, category) => async dispatch => {
 
     try {
         var filteredDrinks;
-        const response = await axios.get('/api/drinks/getalldrinks')
+        // const response = await axios.get('/api/drinks/getalldrinks')
+        const response = await api.get('/api/drinks/getalldrinks')
         filteredDrinks = response.data.filter(drink => drink.name.toLowerCase().includes(searchkey))
 
         if (category != 'all') {
@@ -46,7 +54,8 @@ export const addDrink = (drink) => async dispatch => {
     dispatch({ type: 'ADD_DRINK_REQUEST' })
 
     try {
-        const response = await axios.post('/api/drinks/adddrink', { drink })
+        // const response = await axios.post('/api/drinks/adddrink', { drink })
+        const response = await api.post('/api/drinks/adddrink', { drink })
         console.log(response);
         dispatch({ type: 'ADD_DRINK_SUCCESS' })
     } catch (error) {
@@ -58,7 +67,8 @@ export const editDrink = (editeddrink) => async dispatch => {
     dispatch({ type: 'EDIT_DRINK_REQUEST' })
 
     try {
-        const response = await axios.post('/api/drinks/editdrink', { editeddrink })
+        // const response = await axios.post('/api/drinks/editdrink', { editeddrink })
+        const response = await api.post('/api/drinks/editdrink', { editeddrink })
         console.log(response);
         dispatch({ type: 'EDIT_DRINK_SUCCESS' })
         window.location.href = '/admin/drinkslist'
@@ -69,7 +79,8 @@ export const editDrink = (editeddrink) => async dispatch => {
 
 export const deleteDrink = (drinkid) => async dispatch => {
     try {
-        const response = await axios.post('/api/drinks/deletedrink', { drinkid })
+        // const response = await axios.post('/api/drinks/deletedrink', { drinkid })
+        const response = await api.post('/api/drinks/deletedrink', { drinkid })
         toast.success('Bautura stearsa cu succes', {
             position: toast.POSITION.BOTTOM_CENTER // Set the toast position to bottom-center
         })
