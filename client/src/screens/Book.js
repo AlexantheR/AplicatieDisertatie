@@ -54,30 +54,24 @@ export default props => {
 
   const getDate = () => {
     const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ];
-    const date =
-      months[selection.date.getMonth()] +
-      " " +
-      selection.date.getDate() +
-      " " +
-      selection.date.getFullYear();
-    let time = selection.time.slice(0, -2);
-    time = selection.time > 12 ? time + 12 + ":00" : time + ":00";
-    console.log(time);
-    const datetime = new Date(date + " " + time);
-    return datetime;
+
+    const day = selection.date.getDate();
+    const month = months[selection.date.getMonth()];
+    const year = selection.date.getFullYear();
+
+    // Ex: "May 15 2025 13:00"
+    const baseString = `${month} ${day} ${year} ${selection.time}`;
+
+    // Creează obiectul Date manual (în ora locală)
+    const localDate = new Date(baseString);
+
+    // Convertire explicită în UTC
+    const utcDate = new Date(localDate.getTime() - localDate.getTimezoneOffset() * 60000);
+
+    return utcDate;
   };
 
   const getEmptyTables = () => {
