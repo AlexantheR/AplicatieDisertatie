@@ -53,26 +53,27 @@ export default props => {
   const [reservationError, setReservationError] = useState(false);
 
   const getDate = () => {
-    const months = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-    ];
+    const selectedDate = selection.date;
+    const [hourRaw] = selection.time.match(/\d+/);
+    const isPM = selection.time.toUpperCase().includes("PM");
 
-    const day = selection.date.getDate();
-    const month = months[selection.date.getMonth()];
-    const year = selection.date.getFullYear();
+    let hour = parseInt(hourRaw);
+    if (isPM && hour < 12) hour += 12;
+    if (!isPM && hour === 12) hour = 0; // 12AM = 0
 
-    // Ex: "May 15 2025 13:00"
-    const baseString = `${month} ${day} ${year} ${selection.time}`;
+    const localDate = new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth(),
+      selectedDate.getDate(),
+      hour,
+      0,
+      0
+    );
 
-    // Creează obiectul Date manual (în ora locală)
-    const localDate = new Date(baseString);
-
-    // Convertire explicită în UTC
     const utcDate = new Date(localDate.getTime() - localDate.getTimezoneOffset() * 60000);
-
     return utcDate;
   };
+
 
   const getEmptyTables = () => {
     let tables = totalTables.filter(table => table.isAvailable);
