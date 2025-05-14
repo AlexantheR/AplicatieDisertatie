@@ -14,35 +14,34 @@ const Reservation = require("../models/reservation").model;
 // 	"email": String
 // }
 
-router.post("/", function(req, res, next) {
-  Day.find({ date: req.body.date }, (err, days) => {
-    if (!err) {
-      if (days.length > 0) {
-        let day = days[0];
-        day.tables.forEach(table => {
-          if (table._id == req.body.table) {
-            // The correct table is table
-            table.reservation = new Reservation({
-              name: req.body.name,
-              phone: req.body.phone,
-              email: req.body.email
-            });
-            table.isAvailable = false;
-            day.save(err => {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log("Reservat");
-                res.status(200).send("Rezervare adaugata");
-              }
-            });
-          }
-        });
-      } else {
-        console.log("Zi negasita");
-      }
+router.post("/", async (req, res) => {
+  try {
+    const { date, table: tableId, name, phone, email } = req.body;
+
+    const day = await Day.findOne({ date });
+
+    if (!day) {
+      return res.status(404).send("Ziua nu a fost găsită");
     }
-  });
+
+    const table = day.tables.find(t => t._id.toString() === tableId.toString());
+
+    if (!table) {
+      return res.status(404).send("Masa nu a fost găsită");
+    }
+
+    table.reservation = new Reservation({ name, phone, email });
+    table.isAvailable = false;
+
+    await day.save();
+
+    return res.status(200).send("Rezervare adăugată cu succes");
+
+  } catch (error) {
+    console.error("Eroare la rezervare:", error);
+    return res.status(500).send("Eroare internă server");
+  }
 });
+
 
 module.exports = router;
