@@ -4,6 +4,8 @@ import { logoutUser } from "../actions/userActions";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 
 function NavigationBar() {
   const cartstate = useSelector(state => state.cartReducer)
@@ -21,51 +23,42 @@ function NavigationBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-
-            <div className="navbarPageLinks">
-              <Nav.Link href="/pizzamenu">Pizza</Nav.Link>
-              <Nav.Link href="/drinks">Bauturi</Nav.Link>
-              <Nav.Link href="/book">Rezervare</Nav.Link>
-            </div>
+            <Nav.Link href="/pizzamenu">Pizza</Nav.Link>
+            <Nav.Link href="/drinks">Băuturi</Nav.Link>
+            <Nav.Link href="/book">Rezervare</Nav.Link>
           </Nav>
 
-          <ul className="navbar-nav ml-auto">
-
+          <Nav className="ms-auto">
             {currentUser ? (
-
-              <div className="dropdown show mt-2">
-                <a className="dropdown-toggle" type="button"
-                  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="false">
-                  {currentUser?.isPremium ? <span className="badge badge-warning">Premium</span> : null} {currentUser.name}
-                </a>
-
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a className="dropdown-item" href="/orders">Comenzile mele</a>{
-                    (currentUser.isAdmin == 1 ? (<a className="dropdown-item" href="/admin">Panou Admin</a>) : null)}
-                  {currentUser?.isPremium ? <a className="dropdown-item" href="/makeuserpremium">Dezabonare Premium?</a> : 
-                  (<a className="dropdown-item" href="/makeuserpremium">Premium?</a>)}
-                  
-                  <a className="dropdown-item" href="#"
-                    onClick={() => { dispatch(logoutUser()) }}>
-                    <li>Deconectare</li></a>
-                </div>
-              </div>
-
+              <NavDropdown
+                title={
+                  <>
+                    {currentUser?.isPremium && <span className="badge bg-warning text-dark me-2">Premium</span>}
+                    {currentUser.name}
+                  </>
+                }
+                id="user-dropdown"
+              >
+                <NavDropdown.Item href="/orders">Comenzile mele</NavDropdown.Item>
+                {currentUser.isAdmin === 1 && (
+                  <NavDropdown.Item href="/admin">Panou Admin</NavDropdown.Item>
+                )}
+                <NavDropdown.Item href="/makeuserpremium">
+                  {currentUser?.isPremium ? "Dezabonare Premium?" : "Premium?"}
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={() => dispatch(logoutUser())}>
+                  Deconectare
+                </NavDropdown.Item>
+              </NavDropdown>
             ) : (
-              <li className="nav-item">
-                <a className="nav-link" href="/login">
-                  Autentificare
-                </a>
-              </li>)}
-            <li className="nav-item">
-              <a className="nav-link" href="/cart">
-                Cos {cartstate.cartItems.length}
-              </a>
-            </li>
-          </ul>
+              <Nav.Link href="/login">Autentificare</Nav.Link>
+            )}
 
+            <Nav.Link href="/cart">Coș ({cartstate.cartItems.length})</Nav.Link>
+          </Nav>
         </Navbar.Collapse>
+
       </Container>
     </Navbar >
   );

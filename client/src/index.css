@@ -27,12 +27,11 @@ code {
   display: flex !important;
 }
 
-.navbarPageLinks {
+/* .navbarPageLinks {
   display: inline-flex !important;
   margin-left: auto !important;
   margin-right: auto !important;
-}
-
+} */
 
 
 .nav-link {
