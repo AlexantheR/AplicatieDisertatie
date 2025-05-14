@@ -5,6 +5,7 @@ import { getAllPizzas } from "../actions/pizzaActions";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 import Filter from "../components/Filter";
+import { Row, Col } from "react-bootstrap";
 
 export default function PizzaMenu() {
 
@@ -14,7 +15,7 @@ export default function PizzaMenu() {
 
   const { pizzas, error, loading } = pizzasstate;
 
-console.log("PizzaMenu loaded");
+  console.log("PizzaMenu loaded");
 
   useEffect(() => {
     dispatch(getAllPizzas());
@@ -30,15 +31,23 @@ console.log("PizzaMenu loaded");
         ) : error ? (
           <Error error='Ceva nu a mers bine!!' />
         ) : (
-          pizzas.map((pizza) => {
-            return (
-              <div className="col-md-3 m-3" key={pizza._id}>
-                <div>
-                  <Pizza pizza={pizza} />
-                </div>
+          <Row className="justify-content-center">
+            {pizzas.length === 1 ? (
+              <div className="single-pizza-container">
+                <Col xs={12} sm={12} md={8} lg={6} xl={4}>
+                  <Pizza pizza={pizzas[0]} />
+                </Col>
               </div>
-            );
-          })
+            ) : (
+              pizzas.map(pizza => (
+                <Col xs={12} sm={6} md={4} lg={3} key={pizza._id}>
+                  <Pizza pizza={pizza} />
+                </Col>
+              ))
+            )}
+          </Row>
+
+
         )}
 
       </div>

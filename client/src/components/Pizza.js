@@ -58,18 +58,15 @@ export default function Pizza({ pizza }) {
   };
 
   return (
-    <div
-      data-aos='zoom-in'
-      className="shadow p-3 mb-5 bg-white rounded"
-      key={pizza._id}
-    >
+  <div data-aos='zoom-in' className="pizza-card shadow p-3 mb-5 bg-white rounded" key={pizza._id}>
+
       <div onClick={handleShow}>
         <h1>{pizza.name}</h1>
         <img
-          src={pizza.image}
-          className="img-fluid"
-          style={{ height: "200px", width: "250px" }}
-        />
+  src={pizza.image}
+  alt={pizza.name}
+  className="pizza-img"
+/>
       </div>
 
       <div className="flex-container">
@@ -104,17 +101,10 @@ export default function Pizza({ pizza }) {
         </div>
       </div>
 
-      <div className="flex-container">
-        <div className="m-1 w-100">
-          <h1 className="mt-1">
-            Pret: {calculateDiscountedPrice()}
-          </h1>
-        </div>
-
-        <div className="m-1 w-100">
-          <button className="book-table-btn" onClick={handleOrder}>COMANDA</button>
-        </div>
-      </div>
+     <div className="order-section d-flex flex-column align-items-center mt-3">
+  <h4 className="mb-2">Pret: {calculateDiscountedPrice()}</h4>
+  <button className="book-table-btn" onClick={handleOrder}>COMANDA</button>
+</div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

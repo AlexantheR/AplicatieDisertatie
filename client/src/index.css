@@ -554,3 +554,79 @@ input[type=date]::-webkit-calendar-picker-indicator {
   text-align: left;
   text-indent: 80px;
 }
+
+
+.pizza-card {
+  text-align: center;
+  padding: 15px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.pizza-card:hover {
+  transform: scale(1.02);
+}
+
+.pizza-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.pizza-card h1 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .pizza-card h1 {
+    font-size: 1rem;
+  }
+
+  .flex-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pizza-card select,
+  .pizza-card .book-table-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .pizza-card .m-1 {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+.pizza-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto 20px auto;
+  border-radius: 8px;
+}
+
+.order-section h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .order-section h4 {
+    font-size: 1.1rem;
+  }
+
+  .pizza-card {
+    padding: 12px;
+  }
+
+  .pizza-card h1 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+}
