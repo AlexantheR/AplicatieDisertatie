@@ -8,9 +8,6 @@ import { getAllUsersReducer, loginUserReducer, registerUserReducer } from "./red
 import { placeOrderReducer, getUserOrdersReducer, getAllOrdersReducer } from "./reducers/orderReducer";
 import { getAllDrinksReducer, addDrinkReducer, editDrinkReducer, getDrinkByIdReducer } from "./reducers/drinkReducers";
 
-
-
-
 const finalReducer = combineReducers({
   getAllPizzasReducer: getAllPizzasReducer,
   cartReducer: cartReducer,
