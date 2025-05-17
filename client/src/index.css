@@ -17,25 +17,17 @@ code {
 }
 
 .navbar {
-  width: 100%;
-  background-color: #e74646 !important;
+  position: sticky;
+  top: 0;
+  z-index: 1050; /* mai mare decât restul elementelor */
 }
-
-
 
 .navbarButtons {
   display: flex !important;
 }
 
-/* .navbarPageLinks {
-  display: inline-flex !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-} */
-
-
 .nav-link {
-  /* color: #f7d3ae !important; */
+
   color: white !important;
 }
 
@@ -50,30 +42,6 @@ code {
 #dropdownMenuLink {
   color: white !important;
 }
-
-/* 
-
-
-
-.nav-buttons{
-  display: grid !important;
-  grid-template-columns: 1fr 1fr 1fr !important;
-  grid-gap: 20px !important;
-  margin-left:auto;
-  margin-right: auto;
-}
-
-.nav-link {
-  color: #FFF3E2 !important;
-}
-
-.navbar-toggler-icon{
-  color: #FFF3E2 !important;
-}
-
-
-} */
-
 
 h1 {
   font-size: 20px !important;
@@ -104,7 +72,6 @@ select {
 .fa-plus {
   color: green;
   margin: 5px;
-
 }
 
 .fa-minus {
@@ -165,7 +132,6 @@ input {
   background-color: #E74646 !important;
   color: white !important;
 }
-
 
 .registerLoginLink {
   color: black;
@@ -261,21 +227,8 @@ tr {
   background-color: #ff8500;
 }
 
-@media (min-width: 768px) {
-  .book-table-btn {
-    font-size: 1.4rem;
-    padding: 0.5% 5%;
-  }
-}
-
 .big-img-container {
   padding: 10% 0;
-}
-
-@media (min-width: 768px) {
-  .big-img-container {
-    padding: 4% 0;
-  }
 }
 
 .big-img {
@@ -336,33 +289,20 @@ input[type=date]::-webkit-calendar-picker-indicator {
   color: black;
 }
 
-@media (min-width: 768px) {
-  #booking-dropdown {
-    font-size: 1.2rem;
-  }
-}
-
 .tables-display {
   background-color: #e74c3c;
   margin: auto;
   border-radius: 25px;
   max-width: 100%;
   height: calc(300px);
-  /* Adjust the height based on your requirements */
+
   width: 90%;
-  /* Adjust the width as needed */
+
   overflow: auto;
 }
 
 .table-container {
   margin: 0 1%;
-}
-
-
-@media (min-width: 768px) {
-  .tables-display {
-    margin: 6% 2.5%;
-  }
 }
 
 .table-display-message {
@@ -382,9 +322,9 @@ input[type=date]::-webkit-calendar-picker-indicator {
   font-size: 1.2rem;
   font-family: Roboto, sans-serif;
   text-align: center;
-  /* Align the text in the center */
+
   margin: 0 auto;
-  /* Center the element horizontally */
+
 }
 
 .wrong-time {
@@ -392,13 +332,11 @@ input[type=date]::-webkit-calendar-picker-indicator {
   font-size: 1.2rem;
   font-family: Roboto, sans-serif;
   text-align: center;
-  /* Align the text in the center */
+
   margin: 0 auto;
-  /* Center the element horizontally */
+
   padding-top: 5%;
 }
-
-
 
 .table {
   background-color: rgba(245, 246, 250, 0.4);
@@ -442,7 +380,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
   font-family: Roboto, sans-serif;
 }
 
-
 .reservation-details-container {
   padding: 0 4%;
   padding-bottom: 5%;
@@ -451,12 +388,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .reservation-details {
   margin: 0 2%;
   margin-bottom: 5%;
-}
-
-@media (min-width: 768px) {
-  .reservation-details {
-    margin-bottom: 0;
-  }
 }
 
 .reservation-input:focus {
@@ -487,47 +418,36 @@ input[type=date]::-webkit-calendar-picker-indicator {
   padding-bottom: 8%;
 }
 
-@media (min-width: 768px) {
-  .thanks-header {
-    font-size: 5.5rem;
-  }
-
-  .thanks-subtext {
-    font-size: 2.2rem;
-  }
-
-  .thank-you-pizza {
-    font-size: 7rem;
-    padding-bottom: 4%;
-  }
+.thank-you-pizza {
+  font-size: 7rem;
+  padding-bottom: 4%;
 }
 
-.reservation-wrapper {
+s .reservation-wrapper {
   margin-top: -10px;
-  /* Adjust the top margin as needed */
+
   margin-bottom: -10px;
-  /* Adjust the bottom margin as needed */
+
 }
 
 .reservation-row {
   margin-top: -10px;
-  /* Adjust the top margin as needed */
+
   margin-bottom: -10px;
-  /* Adjust the bottom margin as needed */
+
 }
 
 .chart-container {
-  height: 400px; /* Adjust the height as needed */
+  height: 400px;
   width: 55%;
   float: left;
 }
 
 .piechart-container {
-  height: 400px; /* Adjust the height as needed */
+  height: 400px;
   width: 45%;
   float: left;
 }
-
 
 .motiv-premium {
   text-align: justify;
@@ -543,25 +463,24 @@ input[type=date]::-webkit-calendar-picker-indicator {
   color: #e74c3c;
 }
 
-.procent-reducere{
+.procent-reducere {
   color: #e74c3c;
   font-size: 0.9rem;
 }
 
-.total-comenzi{
+.total-comenzi {
   font-size: 1.4rem;
   font-weight: bold;
   text-align: left;
   text-indent: 80px;
 }
 
-
 .pizza-card {
   text-align: center;
   padding: 15px;
   border-radius: 12px;
   background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
 }
 
@@ -580,27 +499,15 @@ input[type=date]::-webkit-calendar-picker-indicator {
   margin-bottom: 10px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .pizza-card h1 {
-    font-size: 1rem;
-  }
+.pizza-card select,
+.pizza-card .book-table-btn {
+  width: 100%;
+  margin-bottom: 10px;
+}
 
-  .flex-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .pizza-card select,
-  .pizza-card .book-table-btn {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  .pizza-card .m-1 {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
+.pizza-card .m-1 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 .pizza-img {
@@ -616,17 +523,182 @@ input[type=date]::-webkit-calendar-picker-indicator {
   font-weight: bold;
 }
 
+.pizza-card h1 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+/* === Responsive Rules === */
+@media (min-width: 768px) {
+  .book-table-btn {
+    font-size: 1.4rem;
+    padding: 0.5% 5%;
+  }
+}
+
+@media (min-width: 768px) {
+  .big-img-container {
+    padding: 4% 0;
+  }
+}
+
+@media (min-width: 768px) {
+  #booking-dropdown {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .tables-display {
+    margin: 6% 2.5%;
+  }
+}
+
+@media (min-width: 768px) {
+  .reservation-details {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .thanks-header {
+    font-size: 5.5rem;
+  }
+
+  .thanks-subtext {
+    font-size: 2.2rem;
+  }
+
+  @media (max-width: 768px) {
+    .pizza-card h1 {
+      font-size: 1rem;
+    }
+
+    .flex-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .order-section h4 {
+        font-size: 1.1rem;
+      }
+
+      .pizza-card {
+        padding: 12px;
+      }
+    }
+  }
+}
+
+.firstpage-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.firstpage-hero {
+  background-image: url('./images/pizze.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+}
+
 @media (max-width: 768px) {
-  .order-section h4 {
-    font-size: 1.1rem;
+  .firstpage-hero {
+    background-image: url('./images/pizza-mobil.png');
+    background-size: cover;
+    background-position: center;
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+  }
+}
+
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.hero-buttons .btn {
+  min-width: 160px;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+}
+
+.firstpage-about {
+  background-color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.firstpage-about h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.firstpage-about p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 1.8rem;
   }
 
-  .pizza-card {
-    padding: 12px;
+  .hero-subtitle {
+    font-size: 1rem;
   }
 
-  .pizza-card h1 {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+  .hero-buttons {
+    flex-direction: column;
   }
+
+  .hero-buttons .btn {
+    width: 90%;
+  }
+}
+
+.cart-toast-global {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  z-index: 9999;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -10px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -10px); }
 }

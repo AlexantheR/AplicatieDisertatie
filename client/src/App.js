@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
-import bootstrap from '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 import Navbar from './components/Navbar';
 import PizzaMenu from './screens/PizzaMenu';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Cartscreen from './screens/Cartscreen';
 import Registerscreen from './screens/Registerscreen';
 import Loginscreen from './screens/Loginscreen';
@@ -16,31 +15,34 @@ import Book from './screens/Book';
 import ThankYou from './screens/ThankYou';
 import PaymentScreen from './screens/PaymentScreen';
 import Makeuserpremium from './screens/MakeUserPremium';
-import { ToastContainer, toast } from 'react-toastify';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-
   return (
-    <div className="App">
-      <Navbar />
-      <ToastContainer />
-      <BrowserRouter>
-        <Route path="/" exact component={FirstPage} />
-        <Route path="/PizzaMenu" exact component={PizzaMenu} />
-        <Route path="/cart" exact component={Cartscreen} />
-        <Route path="/register" exact component={Registerscreen} />
-        <Route path='/login' exact component={Loginscreen} />
-        <Route path='/orders' exact component={Orderscreen} />
-        <Route path='/admin' component={Adminscreen} />
-        <Route path='/drinks' exact component={DrinksMenu} />
-        <Route path='/book' exact component={Book} />
-        <Route path='/thankyou' exact component={ThankYou} />
-        <Route path='/payment' exact component={PaymentScreen} />
-        <Route path='/makeuserpremium' exact component={Makeuserpremium} />
-      </BrowserRouter>
-
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Navbar />
+        <ToastContainer />
+        <Routes>
+          <Route path="/" element={<FirstPage />} />
+          <Route path="/pizzamenu" element={<PizzaMenu />} />
+          <Route path="/drinks" element={<DrinksMenu />} />
+          <Route path="/cart" element={<Cartscreen />} />
+          <Route path="/register" element={<Registerscreen />} />
+          <Route path="/login" element={<Loginscreen />} />
+          <Route path="/orders" element={<Orderscreen />} />
+          <Route path="/admin" element={<Adminscreen />} />
+          <Route path="/book" element={<Book />} />
+          <Route path="/thankyou" element={<ThankYou />} />
+          <Route path="/payment" element={<PaymentScreen />} />
+          <Route path="/makeuserpremium" element={<Makeuserpremium />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
