@@ -1,5 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap');
 
+/* Layout global care permite sticky behavior */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Raleway', sans-serif;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+  width: 100%;
+  background-color: #fff;
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -19,7 +41,8 @@ code {
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 1050; /* mai mare decât restul elementelor */
+  z-index: 999;
+  background-color: #e74646 !important;
 }
 
 .navbarButtons {

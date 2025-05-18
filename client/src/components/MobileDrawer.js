@@ -9,44 +9,40 @@ import { useState, useEffect } from "react";
 
 const MobileDrawer = ({ isOpen, onClose, currentUser, cartItems }) => {
 
-  const getTotalPrice = () => {
-  if (!Array.isArray(cartItems)) return "0.00";
+    const getTotalPrice = () => {
+        if (!Array.isArray(cartItems)) return "0.00";
 
-  const total = cartItems.reduce((sum, item) => {
-    if (!item || !Array.isArray(item.prices) || item.prices.length === 0) {
-      return sum;
-    }
+        const total = cartItems.reduce((sum, item) => {
+            if (!item || !Array.isArray(item.prices) || item.prices.length === 0) {
+                return sum;
+            }
 
-    const priceEntry = item.prices[0];
-    let variantPrice = 0;
+            const priceEntry = item.prices[0];
+            let variantPrice = 0;
 
-    if (typeof priceEntry === "number") {
-      // direct numeric price (e.g. drinks)
-      variantPrice = priceEntry;
-    } else if (typeof priceEntry === "object" && priceEntry !== null) {
-      // structured price (e.g. pizza with variants)
-      if (item.variant && priceEntry[item.variant] !== undefined) {
-        variantPrice = priceEntry[item.variant];
-      } else {
-        const firstAvailable = Object.values(priceEntry).find(p => typeof p === "number");
-        variantPrice = firstAvailable || 0;
-      }
-    }
+            if (typeof priceEntry === "number") {
+                // direct numeric price (e.g. drinks)
+                variantPrice = priceEntry;
+            } else if (typeof priceEntry === "object" && priceEntry !== null) {
+                // structured price (e.g. pizza with variants)
+                if (item.variant && priceEntry[item.variant] !== undefined) {
+                    variantPrice = priceEntry[item.variant];
+                } else {
+                    const firstAvailable = Object.values(priceEntry).find(p => typeof p === "number");
+                    variantPrice = firstAvailable || 0;
+                }
+            }
 
-    const qty = parseInt(item.quantity);
-    if (!isNaN(qty) && typeof variantPrice === "number") {
-      return sum + variantPrice * qty;
-    }
+            const qty = parseInt(item.quantity);
+            if (!isNaN(qty) && typeof variantPrice === "number") {
+                return sum + variantPrice * qty;
+            }
 
-    return sum;
-  }, 0);
+            return sum;
+        }, 0);
 
-  return total.toFixed(2);
-};
-
-
-
-
+        return total.toFixed(2);
+    };
 
     const getTotalItems = () => {
         if (!Array.isArray(cartItems)) return 0;
@@ -71,7 +67,9 @@ const MobileDrawer = ({ isOpen, onClose, currentUser, cartItems }) => {
         <div className={`drawer-overlay ${isOpen ? "open" : ""}`} onClick={onClose}>
             <div className="drawer" onClick={(e) => e.stopPropagation()}>
                 <div className="drawer-header">
-                    <h2 className="drawer-brand">MIZZA PIZZA</h2>
+                    <Link to="/" onClick={onClose} className="drawer-brand text-danger text-decoration-none">
+                        <h2 className="drawer-brand">MIZZA PIZZA</h2>
+                    </Link>
                     <button onClick={onClose} className="close-btn">
                         <FaTimes />
                     </button>

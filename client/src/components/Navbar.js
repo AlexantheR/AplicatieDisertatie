@@ -40,11 +40,7 @@ function NavigationBar() {
           {/* Desktop layout */}
           <Navbar.Brand as={Link} to="/" className="d-none d-lg-block text-white">MIZZA PIZZA</Navbar.Brand>
 
-          <Navbar.Toggle
-            aria-controls="basic-navbar-nav"
-            className="d-none d-lg-block"
-            onClick={() => setExpanded(!expanded)}
-          />
+
 
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-between d-none d-lg-flex">
             <Nav className="navbarPageLinks">

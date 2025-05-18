@@ -27,7 +27,8 @@ function App() {
       <div className="App">
         <Navbar />
         <ToastContainer />
-        <Routes>
+        <main>
+            <Routes>
           <Route path="/" element={<FirstPage />} />
           <Route path="/pizzamenu" element={<PizzaMenu />} />
           <Route path="/drinks" element={<DrinksMenu />} />
@@ -41,6 +42,8 @@ function App() {
           <Route path="/payment" element={<PaymentScreen />} />
           <Route path="/makeuserpremium" element={<Makeuserpremium />} />
         </Routes>
+        </main>
+      
       </div>
     </BrowserRouter>
   );
