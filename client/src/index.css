@@ -313,15 +313,15 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 .tables-display {
-  background-color: #e74c3c;
+  background-color: #f9f9f9;
   margin: auto;
   border-radius: 25px;
-  max-width: 100%;
-  height: calc(300px);
-
-  width: 90%;
-
-  overflow: auto;
+  max-width: 95%;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
 }
 
 .table-container {
@@ -351,15 +351,19 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 .wrong-time {
-  color: white;
-  font-size: 1.2rem;
-  font-family: Roboto, sans-serif;
+  background-color: #ffe6e6;
+  color: #d8000c;
+  border: 1px solid #d8000c;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
   text-align: center;
-
-  margin: 0 auto;
-
-  padding-top: 5%;
+  max-width: 500px;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.1);
 }
+
 
 .table {
   background-color: rgba(245, 246, 250, 0.4);
@@ -367,6 +371,20 @@ input[type=date]::-webkit-calendar-picker-indicator {
   border-radius: 25px;
   min-width: 80px;
 }
+
+.table-info-message {
+  background-color: #eaf4fe;
+  color: #31708f;
+  border: 1px solid #bce8f1;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
 
 .table-row {
   margin-bottom: 8px;
@@ -573,7 +591,14 @@ s .reservation-wrapper {
 
 @media (min-width: 768px) {
   .tables-display {
-    margin: 6% 2.5%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
+  }
+
+  .reservation-wrapper .row {
+    justify-content: center;
   }
 }
 
@@ -724,4 +749,344 @@ s .reservation-wrapper {
   10% { opacity: 1; transform: translate(-50%, 0); }
   90% { opacity: 1; }
   100% { opacity: 0; transform: translate(-50%, -10px); }
+}
+
+/* --- Stiluri adăugate sau modificate pentru pagina de rezervare (book.js) --- */
+
+.reservation-wrapper {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pizza-cta {
+  margin-bottom: 20px;
+}
+
+.looking-for-pizza {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e74646;
+}
+
+.pizza-slice {
+  margin-left: 8px;
+}
+
+.selected-table {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+.reservation-error {
+  color: #c0392b;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.booking-dropdown-menu {
+  width: 100%;
+}
+
+/* .tables-display {
+  background-color: #fefefe;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 30px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+} */
+
+.table-key {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.empty-table {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: #28a745;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.full-table {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin-left: 20px;
+  margin-right: 6px;
+}
+
+.reservation-details-container {
+  margin-top: 30px;
+  row-gap: 15px;
+}
+
+.reservation-details input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .looking-for-pizza {
+    font-size: 1.6rem;
+  }
+
+  .reservation-details-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tables-display {
+    padding: 10px;
+  }
+}
+/* Calendar picker styled like dropdowns */
+.react-datepicker-wrapper,
+.react-datepicker__input-container input {
+  width: 85%;
+  padding: 4% 0;
+  background-color: #e74c3c;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  margin: 2% 0;
+}
+
+.react-datepicker__input-container input:hover {
+  color: #e74c3c;
+  background-color: white !important;
+  border: 2px solid #e74c3c !important;
+}
+
+.react-datepicker__input-container input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Mese - card styling */
+.reservation-wrapper {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.looking-for-pizza {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e74646;
+}
+
+.pizza-slice {
+  margin-left: 8px;
+}
+
+.selected-table {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+.reservation-error {
+  color: #c0392b;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #e74646;
+  color: white;
+  border: none;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.react-datepicker__input-container input:hover {
+  background-color: white;
+  color: #e74646;
+  border: 2px solid #e74646;
+}
+
+.react-datepicker__input-container input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.tables-display {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1000px;
+  padding: 30px 10px;
+}
+
+
+
+.table-key {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.empty-table {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: #28a745;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.full-table {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin-left: 20px;
+  margin-right: 6px;
+}
+
+.reservation-table-card {
+  width: 130px;
+  height: 130px;
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  margin: 10px;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.reservation-table-card:hover {
+  transform: translateY(-4px);
+}
+
+.reservation-table-card.available {
+  border: 2px solid #28a745;
+}
+
+.reservation-table-card.occupied {
+  border: 2px solid #ccc;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.table-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.table-capacity {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.table-status.liber {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.table-status.ocupat {
+  color: #999;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .looking-for-pizza {
+    font-size: 1.6rem;
+  }
+
+  .tables-display {
+    padding: 10px;
+  }
+
+  .reservation-wrapper {
+    padding: 20px 10px;
+  }
+}
+
+/* Spațiere între butoane pe mobil */
+@media (max-width: 768px) {
+  .reservation-wrapper .row > .col,
+  .reservation-wrapper .row > [class*="col-"] {
+    margin-bottom: 12px;
+  }
+
+  .reservation-wrapper .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .react-datepicker-wrapper,
+  .react-datepicker__input-container input,
+  .dropdown-toggle.form-control {
+    width: 90%;
+    margin: 0 auto 12px auto;
+  }
+
+  .tables-display {
+    justify-content: center;
+  }
+}
+
+.custom-datepicker {
+  appearance: none;
+  background-color: #dc3545;  /* culoare identică cu celelalte butoane */
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-datepicker:hover {
+  background-color: white;
+  color: #dc3545;
+  border: 2px solid #dc3545;
+}
+
+.custom-datepicker:focus {
+  outline: none;
+  box-shadow: none;
 }
