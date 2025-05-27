@@ -21,7 +21,7 @@
  "name":"Coca-Cola Zero 330ml",
  "prices": [8],
  "category":"Racoritoare",
- "image":"https://www.pngfind.com/pngs/m/161-1614737_coca-cola-zero-0-5-coca-cola-zero.png"
+ "image":"backend/images/coca-cola-zero.png"
 },{
 
  "name":"Sprite 330ml",
