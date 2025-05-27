@@ -1,11 +1,5 @@
 const mongoose = require("mongoose");
 
-// var mongoURL =
-// "mongodb+srv://adinu90:pFBfDnMXIHNhThNB@cluster0.ptrzjxu.mongodb.net/mern-pizza"
-
-  //"mongodb+srv://adinu90:a9CvgC7NR0GBvfiL@cluster0.22avqt6.mongodb.net/mern-pizza";
-  
-
 var mongoURL = process.env.MONGO_URL;
 
 
