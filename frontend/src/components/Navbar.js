@@ -54,6 +54,9 @@ function NavigationBar() {
                 <NavDropdown
                   title={
                     <>
+                      {currentUser?.isAdmin && (
+                        <span className="badge bg-light text-dark me-2">Admin</span>
+                      )}
                       {currentUser?.isPremium && (
                         <span className="badge bg-warning text-dark me-2">Premium</span>
                       )}
@@ -62,8 +65,9 @@ function NavigationBar() {
                   }
                   id="user-dropdown"
                 >
+
                   <NavDropdown.Item href="/orders">Comenzile mele</NavDropdown.Item>
-                  {currentUser.isAdmin === 1 && (
+                  {currentUser.isAdmin && (
                     <NavDropdown.Item href="/admin">Panou Admin</NavDropdown.Item>
                   )}
                   <NavDropdown.Item href="/makeuserpremium">

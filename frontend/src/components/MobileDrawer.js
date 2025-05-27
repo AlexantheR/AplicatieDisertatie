@@ -77,11 +77,15 @@ const MobileDrawer = ({ isOpen, onClose, currentUser, cartItems }) => {
                 <div className="drawer-user-info">
                     {currentUser ? (
                         <p className="drawer-username">
+                            {currentUser?.isAdmin && (
+                                <span className="badge-admin">Admin</span>
+                            )}
                             {currentUser?.isPremium && (
                                 <span className="badge-premium">Premium</span>
                             )}
                             {currentUser.name}
                         </p>
+
                     ) : (
                         <p className="drawer-username">Vizitator</p>
                     )}
@@ -105,7 +109,7 @@ const MobileDrawer = ({ isOpen, onClose, currentUser, cartItems }) => {
                     {currentUser ? (
                         <>
                             <Link to="/orders" onClick={onClose}>Comenzile mele</Link>
-                            {currentUser.isAdmin === 1 && (
+                            {currentUser.isAdmin && (
                                 <Link to="/admin" onClick={onClose}>Panou Admin</Link>
                             )}
                             <Link to="/makeuserpremium" onClick={onClose}>

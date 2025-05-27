@@ -70,24 +70,27 @@ export default function Adminscreen() {
                     </ul>
 
                     <Routes>
-                        <Route path="/admin" component={Userslist} exact />
-                        <Route path="/admin/userslist" component={Userslist} exact />
-                        <Route path="/admin/orderslist" component={Orderslist} exact />
-                        <Route path="/admin/pizzaslist" component={Pizzaslist} exact />
-                        <Route path="/admin/drinkslist" component={Drinkslist} exact />
-                        <Route path="/admin/addpizza" component={Addpizza} exact />
-                        <Route path="/admin/adddrink" component={Adddrink} exact />
-                        <Route path="/admin/editpizza/:pizzaid" component={Editpizza} exact />
-                        <Route path="/admin/editdrink/:drinkid" component={Editdrink} exact />
-                        <Route path='/admin/graph' exact>
-                            {loading ? (
-                                <div>Loading...</div>
-                            ) : error ? (
-                                <div>Error: {error}</div>
-                            ) : (
-                                <Graph orders={orders} users={users} />
-                            )}
-                        </Route>
+                        <Route path="/" element={<Userslist />} />
+                        <Route path="userslist" element={<Userslist />} />
+                        <Route path="orderslist" element={<Orderslist />} />
+                        <Route path="pizzaslist" element={<Pizzaslist />} />
+                        <Route path="drinkslist" element={<Drinkslist />} />
+                        <Route path="addpizza" element={<Addpizza />} />
+                        <Route path="adddrink" element={<Adddrink />} />
+                        <Route path="editpizza/:pizzaid" element={<Editpizza />} />
+                        <Route path="editdrink/:drinkid" element={<Editdrink />} />
+                        <Route
+                            path="graph"
+                            element={
+                                loading ? (
+                                    <div>Loading...</div>
+                                ) : error ? (
+                                    <div>Error: {error}</div>
+                                ) : (
+                                    <Graph orders={orders} users={users} />
+                                )
+                            }
+                        />
                     </Routes>
                 </div>
             </div>

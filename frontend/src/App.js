@@ -36,7 +36,7 @@ function App() {
           <Route path="/register" element={<Registerscreen />} />
           <Route path="/login" element={<Loginscreen />} />
           <Route path="/orders" element={<Orderscreen />} />
-          <Route path="/admin" element={<Adminscreen />} />
+          <Route path="/admin/*" element={<Adminscreen />} />
           <Route path="/book" element={<Book />} />
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/payment" element={<PaymentScreen />} />
