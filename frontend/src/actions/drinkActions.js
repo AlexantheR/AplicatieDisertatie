@@ -33,20 +33,29 @@ export const getDrinkById = (drinkid) => async dispatch => {
 }
 
 export const filterDrinks = (searchkey, category) => async dispatch => {
-    dispatch({ type: 'GET_DRINKS_REQUEST' })
+    dispatch({ type: 'GET_DRINKS_REQUEST' });
 
     try {
-        var filteredDrinks;
-        // const response = await axios.get('/api/drinks/getalldrinks')
-        const response = await api.get('/api/drinks/getalldrinks')
-        filteredDrinks = response.data.filter(drink => drink.name.toLowerCase().includes(searchkey))
+        const response = await api.get('/api/drinks/getalldrinks');
+        let filteredDrinks = response.data;
 
-        if (category != 'all') {
-            filteredDrinks = response.data.filter(drink => drink.category.toLowerCase() == category)
+        // Filtrare după nume (dacă există căutare)
+        if (searchkey.trim() !== '') {
+            filteredDrinks = filteredDrinks.filter(drink =>
+                drink.name.toLowerCase().includes(searchkey.toLowerCase())
+            );
         }
-        dispatch({ type: 'GET_DRINKS_SUCCESS', payload: filteredDrinks })
+
+        // Filtrare după categorie (dacă nu este "all")
+        if (category.toLowerCase() !== 'all') {
+            filteredDrinks = filteredDrinks.filter(drink =>
+                drink.category.toLowerCase() === category.toLowerCase()
+            );
+        }
+
+        dispatch({ type: 'GET_DRINKS_SUCCESS', payload: filteredDrinks });
     } catch (error) {
-        dispatch({ type: "GET_DRINKS_FAILED", payload: error });
+        dispatch({ type: 'GET_DRINKS_FAILED', payload: error });
     }
 }
 

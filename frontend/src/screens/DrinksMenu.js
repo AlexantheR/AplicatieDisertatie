@@ -21,25 +21,20 @@ export default function DrinksMenu() {
     return (
         <div>
             <FilterDrinks />
-            <div className="row justify-content-center" >
-
-                {loading ? (
-                    <Loading />
-                ) : error ? (
-                    <Error error='Ceva nu a mers bine!!' />
-                ) : (
-                    drinks.map((drink) => {
-                        return (
-                            <div className="col-md-3 m-3" key={drink._id}>
-                                <div>
-                                    <Drink drink={drink} />
-                                </div>
-                            </div>
-                        );
-                    })
-                )}
-
-            </div>
+            {loading ? (
+                <Loading />
+            ) : error ? (
+                <Error error="Ceva nu a mers bine!!" />
+            ) : (
+                <div className="drinks-grid">
+                    {drinks.map((drink) => (
+                        <div key={drink._id}>
+                            <Drink drink={drink} />
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
+
 }
