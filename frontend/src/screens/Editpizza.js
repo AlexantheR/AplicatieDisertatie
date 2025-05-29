@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editPizza, getPizzaById } from "../actions/pizzaActions";
 import Error from "../components/Error";
@@ -17,6 +18,7 @@ export default function Editpizza({ match }) {
     const getpizzabyidstate = useSelector((state) => state.getPizzaByIdReducer);
 
     const { pizza, error, loading } = getpizzabyidstate;
+    const { pizzaid } = useParams();
 
     const editpizzastate = useSelector((state) => state.editPizzaReducer)
     const { editloading, editerror, editsuccess } = editpizzastate;
@@ -24,7 +26,7 @@ export default function Editpizza({ match }) {
     useEffect(() => {
 
         if (pizza) {
-            if (pizza._id == match.params.pizzaid) {
+            if (pizza._id == pizzaid) {
                 setname(pizza.name)
                 setdescription(pizza.description)
                 setcategory(pizza.category)
@@ -34,12 +36,12 @@ export default function Editpizza({ match }) {
                 setimage(pizza.image)
             }
             else {
-                dispatch(getPizzaById(match.params.pizzaid));
+                dispatch(getPizzaById(pizzaid));
             }
 
         }
         else {
-            dispatch(getPizzaById(match.params.pizzaid));
+            dispatch(getPizzaById(pizzaid));
         }
 
 
@@ -50,7 +52,7 @@ export default function Editpizza({ match }) {
         e.preventDefault();
 
         const editedpizza = {
-            _id: match.params.pizzaid,
+            _id: pizzaid,
             name,
             image,
             description,

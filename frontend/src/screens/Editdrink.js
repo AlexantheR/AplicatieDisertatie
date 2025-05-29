@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { editDrink, getDrinkById } from "../actions/drinkActions";
 import Error from "../components/Error";
 import Loading from "../components/Loading";
@@ -16,21 +17,23 @@ export default function Editdrink({ match }) {
 
     const { drink, error, loading } = getDrinkByIdState;
 
+    const { drinkid } = useParams();
+
     const editDrinkState = useSelector((state) => state.editDrinkReducer);
     const { editloading, editsuccess, editerror } = editDrinkState;
 
     useEffect(() => {
         if (drink) {
-            if (drink._id == match.params.drinkid) {
+            if (drink._id == drinkid) {
                 setname(drink.name);
                 setcategory(drink.category);
                 setprices(drink.prices[0]);
                 setimage(drink.image);
             } else {
-                dispatch(getDrinkById(match.params.drinkid));
+                dispatch(getDrinkById(drinkid));
             }
         } else {
-            dispatch(getDrinkById(match.params.drinkid));
+            dispatch(getDrinkById(drinkid));
         }
     }, [drink, dispatch]);
 
@@ -38,7 +41,7 @@ export default function Editdrink({ match }) {
         e.preventDefault();
 
         const editedDrink = {
-            _id: match.params.drinkid,
+            _id: drinkid,
             name,
             image,
             category,
