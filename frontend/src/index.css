@@ -1119,3 +1119,17 @@ s .reservation-wrapper {
   margin: 0 auto;
   box-sizing: border-box;
 }
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.chart-box {
+  height: 350px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
