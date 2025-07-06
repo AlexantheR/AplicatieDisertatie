@@ -333,7 +333,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   padding: 2% 0;
   text-align: center;
   font-size: 1.3rem;
-  color: white;
+  color: rgb(0, 145, 255);
 }
 
 .table-key {

@@ -64,11 +64,17 @@ export default function Book(props) {
       const datetime = getDate();
       if (!datetime) return;
 
+      const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
       fetch(`${process.env.REACT_APP_API_URL}/availability`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}` 
+        },
         body: JSON.stringify({ date: datetime }),
       })
+
         .then(res => res.json())
         .then(res => {
           const tables = res.tables.filter(table =>
@@ -92,11 +98,17 @@ export default function Book(props) {
     const datetime = getDate();
     if (!datetime) return;
 
+    const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
     const res = await fetch(`${process.env.REACT_APP_API_URL}/reservation`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
       body: JSON.stringify({ ...booking, date: datetime, table: selection.table.id }),
     });
+
 
     if (res.ok) navigate("/thankyou");
   };
