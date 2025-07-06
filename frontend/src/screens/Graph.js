@@ -1,7 +1,16 @@
-
 import React, { useEffect, useState } from 'react';
 import { Bar, Pie, Line } from 'react-chartjs-2';
-import { CategoryScale, LinearScale, Title, BarElement, ArcElement, Chart, Legend, LineElement, PointElement } from 'chart.js';
+import {
+    CategoryScale,
+    LinearScale,
+    Title,
+    BarElement,
+    ArcElement,
+    Chart,
+    Legend,
+    LineElement,
+    PointElement,
+} from 'chart.js';
 import 'chartjs-plugin-datalabels';
 
 Chart.register(CategoryScale, LinearScale, Title, BarElement, ArcElement, Legend, LineElement, PointElement);
@@ -16,11 +25,11 @@ export default function Graph({ orders = [], users = [] }) {
     useEffect(() => {
         if (orders.length > 0) {
             const monthlySoldItems = calculateMonthlySoldItems(orders);
-            const chartData = prepareChartData(monthlySoldItems);
-            const options = prepareChartOptions(monthlySoldItems);
-            const totalAmount = calculateTotalAmount(monthlySoldItems);
-            setMonthlyChartData({ data: chartData, options: options });
-            setTotalAmount(totalAmount);
+            setTotalAmount(calculateTotalAmount(monthlySoldItems));
+            setMonthlyChartData({
+                data: prepareChartData(monthlySoldItems),
+                options: prepareChartOptions(),
+            });
 
             const topProducts = calculateTopProducts(orders);
             setTopProductsData({
@@ -36,16 +45,16 @@ export default function Graph({ orders = [], users = [] }) {
                 ],
             });
 
-            const perClient = calculateOrdersPerClient(orders);
+            const ordersPerClient = calculateOrdersPerClient(orders);
             setOrdersPerClientData({
-                labels: perClient.labels,
+                labels: ordersPerClient.labels,
                 datasets: [
                     {
                         label: 'Comenzi per client',
-                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(135, 206, 250, 0.7)',
+                        borderColor: 'rgba(135, 206, 250, 1)',
                         borderWidth: 1,
-                        data: perClient.data,
+                        data: ordersPerClient.data,
                     },
                 ],
             });
@@ -59,120 +68,88 @@ export default function Graph({ orders = [], users = [] }) {
     }, [users]);
 
     const calculateMonthlySoldItems = (orders) => {
-        const monthlySoldItems = {
-            Ianuarie: 0,
-            Februarie: 0,
-            Martie: 0,
-            Aprilie: 0,
-            Mai: 0,
-            Iunie: 0,
-            Iulie: 0,
-            August: 0,
-            Septembrie: 0,
-            Octombrie: 0,
-            Noiembrie: 0,
-            Decembrie: 0,
+        const monthly = {
+            Ianuarie: 0, Februarie: 0, Martie: 0, Aprilie: 0,
+            Mai: 0, Iunie: 0, Iulie: 0, August: 0,
+            Septembrie: 0, Octombrie: 0, Noiembrie: 0, Decembrie: 0,
         };
-
         orders.forEach((order) => {
             const month = new Date(order.createdAt).getMonth();
-            const orderItems = order.orderItems;
-
-            orderItems.forEach((item) => {
-                monthlySoldItems[Object.keys(monthlySoldItems)[month]] += item.price;
+            order.orderItems.forEach((item) => {
+                monthly[Object.keys(monthly)[month]] += item.price;
             });
         });
-
-        return monthlySoldItems;
+        return monthly;
     };
 
-    const prepareChartData = (monthlySoldItems) => {
-        const labels = Object.keys(monthlySoldItems);
-        const data = Object.values(monthlySoldItems);
+    const calculateTotalAmount = (monthly) =>
+        Object.values(monthly).reduce((a, b) => a + b, 0);
 
-        return {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Total comenzi lunare',
-                    backgroundColor: 'rgba(0,0,205,0.3)',
-                    borderColor: 'rgba(0, 0, 191, 1)',
-                    borderWidth: 2,
-                    fill: true,
-                    data: data,
-                },
-            ],
-        };
-    };
+    const prepareChartData = (monthly) => ({
+        labels: Object.keys(monthly),
+        datasets: [
+            {
+                label: 'Total comenzi lunare',
+                backgroundColor: 'rgba(0,0,205,0.3)',
+                borderColor: 'rgba(0, 0, 191, 1)',
+                borderWidth: 2,
+                fill: true,
+                data: Object.values(monthly),
+            },
+        ],
+    });
 
     const prepareChartOptions = () => ({
         maintainAspectRatio: false,
         responsive: true,
         scales: {
             x: { grid: { display: false }, ticks: { font: { size: 12 } } },
-            y: {
-                grid: { color: '#e0e0e0' },
-                ticks: { font: { size: 12 }, maxTicksLimit: 10 },
-            },
+            y: { grid: { color: '#e0e0e0' }, ticks: { font: { size: 12 }, maxTicksLimit: 10 } },
         },
-        plugins: {
-            legend: { position: 'top' },
-        },
+        plugins: { legend: { position: 'top' } },
     });
 
-    const calculateTotalAmount = (monthlySoldItems) => Object.values(monthlySoldItems).reduce((a, b) => a + b, 0);
-
     const calculateTopProducts = (orders) => {
-        const productCount = {};
-
+        const count = {};
         orders.forEach(order =>
             order.orderItems.forEach(item => {
-                productCount[item.name] = (productCount[item.name] || 0) + item.quantity;
+                count[item.name] = (count[item.name] || 0) + item.quantity;
             })
         );
-
-        const sorted = Object.entries(productCount).sort((a, b) => b[1] - a[1]).slice(0, 5);
-        return { labels: sorted.map(([name]) => name), data: sorted.map(([, qty]) => qty) };
+        const sorted = Object.entries(count).sort((a, b) => b[1] - a[1]).slice(0, 5);
+        return { labels: sorted.map(([n]) => n), data: sorted.map(([, q]) => q) };
     };
 
     const calculateOrdersPerClient = (orders) => {
-        const clientOrders = {};
-
-        orders.forEach((order) => {
-            const email = order.user?.email;
+        const clientOrderCounts = {};
+        orders.forEach(order => {
+            const email = order.email;
             if (email) {
-                clientOrders[email] = (clientOrders[email] || 0) + 1;
+                clientOrderCounts[email] = (clientOrderCounts[email] || 0) + 1;
             }
         });
-
-        const sorted = Object.entries(clientOrders)
+        const sorted = Object.entries(clientOrderCounts)
             .sort((a, b) => b[1] - a[1])
-            .slice(0, 5); 
-
+            .slice(0, 5);
         return {
-            labels: sorted.map(entry => entry[0]),
-            data: sorted.map(entry => entry[1]),
+            labels: sorted.map(([email]) => email),
+            data: sorted.map(([, count]) => count),
         };
     };
 
-
     const calculateClientType = (users) => {
         let premium = 0, nonPremium = 0;
-
-        users.forEach(user => (user.isPremium ? premium++ : nonPremium++));
-
-        const pieData = {
+        users.forEach(u => (u.isPremium ? premium++ : nonPremium++));
+        setPieChartData({
             labels: [
                 `Clienti Premium (${premium})`,
-                `Clienti Non-Premium (${nonPremium})`
+                `Clienti Non-Premium (${nonPremium})`,
             ],
             datasets: [{
                 data: [premium, nonPremium],
                 backgroundColor: ['#25add7', 'rgb(0,0,205)'],
             }],
-        };
-
-        setPieChartData(pieData);
+        });
     };
 
     return (
@@ -193,13 +170,23 @@ export default function Graph({ orders = [], users = [] }) {
                 </div>
                 <div className="chart-box">
                     <h4 className="text-center">Comenzi pe client</h4>
-                    {ordersPerClientData && <Bar data={ordersPerClientData} options={{
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: { beginAtZero: true, ticks: { stepSize: 1 } }
-                        }
-                    }} />}
+                    {ordersPerClientData && <Bar
+                        data={ordersPerClientData}
+                        options={{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: true } },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { precision: 0, font: { size: 12 } }
+                                },
+                                x: {
+                                    ticks: { font: { size: 12 } }
+                                }
+                            }
+                        }}
+                    />}
                 </div>
             </div>
         </div>
