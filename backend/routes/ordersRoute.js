@@ -5,6 +5,8 @@ const stripe = require('stripe')('sk_test_51MxrSbBLFgjsWwKCOS2diP0rp2Bav8JbBo4js
 const Order = require('../models/orderModel')
 const nodemailer = require('nodemailer');
 
+const { authenticateToken } = require('../middleware/authMiddleware');
+
 // router.post('/placeorder', async (req, res) => {
 //     const { token, subtotal, currentUser, cartItems } = req.body;
 
@@ -124,7 +126,7 @@ const nodemailer = require('nodemailer');
 //     }
 // });
 
-router.post('/placeorder/card', async (req, res) => {
+router.post('/placeorder/card', authenticateToken, async (req, res) => {
     const { token, subtotal, currentUser, cartItems } = req.body;
 
     const sendInvoiceEmail = async (token, subtotal) => {
@@ -220,7 +222,7 @@ router.post('/placeorder/card', async (req, res) => {
     }
 });
 
-router.post('/placeorder/cash', async (req, res) => {
+router.post('/placeorder/cash', authenticateToken, async (req, res) => {
     const { token, subtotal, currentUser, cartItems } = req.body;
 
     const sendInvoiceEmail = async (token, subtotal) => {
@@ -295,7 +297,7 @@ router.post('/placeorder/cash', async (req, res) => {
     }
 });
 
-router.post('/getuserorders', async (req, res) => {
+router.post('/getuserorders', authenticateToken, async (req, res) => {
     const { userid } = req.body
 
     try {
@@ -308,7 +310,7 @@ router.post('/getuserorders', async (req, res) => {
     }
 })
 
-router.get("/getallorders", async (req, res) => {
+router.get("/getallorders",authenticateToken, async (req, res) => {
 
     try {
         const orders = await Order.find({})
@@ -319,7 +321,7 @@ router.get("/getallorders", async (req, res) => {
 
 });
 
-router.post("/deliverorder", async (req, res) => {
+router.post("/deliverorder", authenticateToken, async (req, res) => {
 
     const orderid = req.body.orderid
     try {
@@ -335,7 +337,7 @@ router.post("/deliverorder", async (req, res) => {
 
 });
 
-router.post("/cancelorder", async (req, res) => {
+router.post("/cancelorder", authenticateToken, async (req, res) => {
     const orderid = req.body.orderid;
     try {
         const order = await Order.findOne({ _id: orderid });

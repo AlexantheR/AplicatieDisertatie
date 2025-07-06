@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Pizza = require("../models/pizzaModel");
+const { authenticateToken } = require('../middleware/authMiddleware');
+
 
 router.get("/getallpizzas", async (req, res) => {
   try {
@@ -11,7 +13,7 @@ router.get("/getallpizzas", async (req, res) => {
   }
 });
 
-router.post("/addpizza", async (req, res) => {
+router.post("/addpizza",authenticateToken, async (req, res) => {
 
   const pizza = req.body.pizza
 
@@ -45,7 +47,7 @@ router.post("/getpizzabyid", async (req, res) => {
 
 });
 
-router.post("/editpizza", async (req, res) => {
+router.post("/editpizza",authenticateToken, async (req, res) => {
 
   const editedpizza = req.body.editedpizza
 
@@ -68,7 +70,7 @@ router.post("/editpizza", async (req, res) => {
 
 });
 
-router.post("/deletepizza", async (req, res) => {
+router.post("/deletepizza",authenticateToken, async (req, res) => {
 
   const pizzaid = req.body.pizzaid
 

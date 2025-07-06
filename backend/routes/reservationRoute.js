@@ -2,6 +2,9 @@ var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
 
+const { authenticateToken } = require('../middleware/authMiddleware');
+
+
 const Day = require("../models/day").model;
 const Reservation = require("../models/reservation").model;
 
@@ -14,7 +17,7 @@ const Reservation = require("../models/reservation").model;
 // 	"email": String
 // }
 
-router.post("/", async (req, res) => {
+router.post("/",authenticateToken, async (req, res) => {
   try {
     const { date, table: tableId, name, phone, email } = req.body;
 

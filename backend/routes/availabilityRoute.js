@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
+const { authenticateToken } = require('../middleware/authMiddleware');
 
 const Day = require("../models/day").model;
 
@@ -9,7 +10,7 @@ const Day = require("../models/day").model;
 //   "date": String ("Dec 02 2019 06:00")
 // }
 
-router.post("/", function(req, res, next) {
+router.post("/",authenticateToken, function(req, res, next) {
   console.log("request attempted");
 
   console.log(req.body);

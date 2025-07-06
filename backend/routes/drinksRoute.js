@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Drink = require("../models/drinksModel");
+const { authenticateToken } = require('../middleware/authMiddleware');
 
 router.get("/getalldrinks", async (req, res) => {
     try {
@@ -11,7 +12,7 @@ router.get("/getalldrinks", async (req, res) => {
     }
 });
 
-router.post("/adddrink", async (req, res) => {
+router.post("/adddrink",authenticateToken, async (req, res) => {
 
     const drink = req.body.drink
 
@@ -43,7 +44,7 @@ router.post("/getdrinkbyid", async (req, res) => {
 
 })
 
-router.post("/editdrink", async (req, res) => {
+router.post("/editdrink",authenticateToken, async (req, res) => {
 
     const editeddrink = req.body.editeddrink
 
@@ -63,7 +64,7 @@ router.post("/editdrink", async (req, res) => {
 
 })
 
-router.post("/deletedrink", async (req, res) => {
+router.post("/deletedrink",authenticateToken, async (req, res) => {
 
     const drinkid = req.body.drinkid
 
