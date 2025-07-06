@@ -171,27 +171,24 @@ export default function Graph({ orders = [], users = [] }) {
     };
 
     const calculateTopProducts = (orders) => {
-        const productCount = {};
+        const productCount = Object.create(null);
 
-        orders.forEach((order) => {
-            order.orderItems.forEach((item) => {
-                if (productCount[item.name]) {
-                    productCount[item.name] += item.quantity;
-                } else {
-                    productCount[item.name] = item.quantity;
-                }
-            });
-        });
+        for (const order of orders) {
+            for (const item of order.orderItems) {
+                productCount[item.name] = (productCount[item.name] || 0) + item.quantity;
+            }
+        }
 
-        const sortedProducts = Object.entries(productCount)
+        const top = Object.entries(productCount)
             .sort((a, b) => b[1] - a[1])
-            .slice(0, 5); // top 5
+            .slice(0, 5);
 
         return {
-            labels: sortedProducts.map(p => p[0]),
-            data: sortedProducts.map(p => p[1]),
+            labels: top.map(p => p[0]),
+            data: top.map(p => p[1])
         };
     };
+
 
     const calculateClientType = (users) => {
         let premiumClients = 0;
@@ -253,23 +250,30 @@ export default function Graph({ orders = [], users = [] }) {
                 )}
             </div>
             {topProductsData && (
-                <div className="top-products-chart">
+                <div className="top-products-chart" style={{ height: "300px", maxWidth: "600px", margin: "0 auto" }}>
                     <h4 className="text-center mt-4">Top 5 Produse Comandate</h4>
                     <Bar
                         data={topProductsData}
                         options={{
                             responsive: true,
                             maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false }
+                            },
                             scales: {
                                 y: {
                                     beginAtZero: true,
-                                    ticks: { precision: 0 }
+                                    ticks: { precision: 0, font: { size: 12 } }
+                                },
+                                x: {
+                                    ticks: { font: { size: 12 } }
                                 }
                             }
                         }}
                     />
                 </div>
             )}
+
         </div>
     );
 }
