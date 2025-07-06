@@ -4,7 +4,7 @@ const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer');
 const { authenticateToken } = require('../middleware/authMiddleware');
-const jwt = require('jsonwebtoken'); 
+const jwt = require('jsonwebtoken');
 
 
 router.get('/checkemail', async (req, res) => {
@@ -20,22 +20,22 @@ router.get('/checkemail', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
+    const { name, email, password } = req.body;
 
-  try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'Adresa de email exista deja.' });
+    try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'Adresa de email exista deja.' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new User({ name, email, password: hashedPassword });
+        await newUser.save();
+
+        res.status(200).json(newUser);  // ✅ Key line
+    } catch (error) {
+        return res.status(400).json({ message: error.message || 'Eroare la înregistrare.' });
     }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ name, email, password: hashedPassword });
-    await newUser.save();
-
-    res.status(200).json(newUser);  // ✅ Key line
-  } catch (error) {
-    return res.status(400).json({ message: error.message || 'Eroare la înregistrare.' });
-  }
 });
 
 
@@ -49,10 +49,11 @@ router.post('/login', async (req, res) => {
             const isPasswordMatched = await bcrypt.compare(password, user.password);
             if (isPasswordMatched) {
                 const token = jwt.sign(
-                    { id: user._id, email: user.email },
+                    { id: user._id, email: user.email, isAdmin: user.isAdmin },
                     process.env.JWT_SECRET,
                     { expiresIn: '2h' }
                 );
+
 
                 const currentUser = {
                     name: user.name,
@@ -74,7 +75,7 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.get("/getallusers",authenticateToken, async (req, res) => {
+router.get("/getallusers", authenticateToken, async (req, res) => {
 
     try {
         const users = await User.find({})
@@ -85,7 +86,7 @@ router.get("/getallusers",authenticateToken, async (req, res) => {
 
 });
 
-router.post("/deleteuser",authenticateToken, async (req, res) => {
+router.post("/deleteuser", authenticateToken, async (req, res) => {
 
     const userid = req.body.userid
 
@@ -98,7 +99,7 @@ router.post("/deleteuser",authenticateToken, async (req, res) => {
 
 });
 
-router.post("/makeuserpremium",authenticateToken, async (req, res) => {
+router.post("/makeuserpremium", authenticateToken, async (req, res) => {
     const { email } = req.body;
 
     const sendPremiumConfirmationEmail = async (email) => {
@@ -143,7 +144,7 @@ router.post("/makeuserpremium",authenticateToken, async (req, res) => {
     }
 });
 
-router.post("/loseuserpremium",authenticateToken, async (req, res) => {
+router.post("/loseuserpremium", authenticateToken, async (req, res) => {
     const { email } = req.body;
 
     try {
