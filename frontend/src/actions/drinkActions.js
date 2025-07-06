@@ -2,7 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+    baseURL: process.env.REACT_APP_API_URL,
 });
 
 
@@ -64,7 +64,13 @@ export const addDrink = (drink) => async dispatch => {
 
     try {
         // const response = await axios.post('/api/drinks/adddrink', { drink })
-        const response = await api.post('/api/drinks/adddrink', { drink })
+        const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
+        const response = await api.post('/api/drinks/adddrink', { drink }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         console.log(response);
         dispatch({ type: 'ADD_DRINK_SUCCESS' })
     } catch (error) {
@@ -77,7 +83,13 @@ export const editDrink = (editeddrink) => async dispatch => {
 
     try {
         // const response = await axios.post('/api/drinks/editdrink', { editeddrink })
-        const response = await api.post('/api/drinks/editdrink', { editeddrink })
+        const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
+        const response = await api.post('/api/drinks/editdrink', { editeddrink }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         console.log(response);
         dispatch({ type: 'EDIT_DRINK_SUCCESS' })
         window.location.href = '/admin/drinkslist'
@@ -89,7 +101,13 @@ export const editDrink = (editeddrink) => async dispatch => {
 export const deleteDrink = (drinkid) => async dispatch => {
     try {
         // const response = await axios.post('/api/drinks/deletedrink', { drinkid })
-        const response = await api.post('/api/drinks/deletedrink', { drinkid })
+        const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
+        const response = await api.post('/api/drinks/deletedrink', { drinkid }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         toast.success('Bautura stearsa cu succes', {
             position: toast.POSITION.BOTTOM_CENTER // Set the toast position to bottom-center
         })

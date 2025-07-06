@@ -59,7 +59,13 @@ export const addPizza = (pizza) => async dispatch => {
 
   try {
     // const response = await axios.post('/api/pizzas/addpizza', { pizza })
-    const response = await api.post('/api/pizzas/addpizza', { pizza })   
+    const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
+    const response = await api.post('/api/pizzas/addpizza', { pizza }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     console.log(response);
     dispatch({ type: 'ADD_PIZZA_SUCCESS' })
   } catch (error) {
@@ -71,7 +77,13 @@ export const editPizza = (editedpizza) => async dispatch => {
   dispatch({ type: 'EDIT_PIZZA_REQUEST' })
   try {
     // const response = await axios.post('/api/pizzas/editpizza', { editedpizza })
-    const response = await api.post('/api/pizzas/editpizza', { editedpizza })
+    const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
+    const response = await api.post('/api/pizzas/editpizza', { editedpizza }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     console.log(response);
     dispatch({ type: 'EDIT_PIZZA_SUCCESS' })
     window.location.href = '/admin/pizzaslist'
@@ -85,7 +97,13 @@ export const deletePizza = (pizzaid) => async dispatch => {
 
   try {
     // const response = await axios.post('/api/pizzas/deletepizza', { pizzaid })
-    const response = await api.post('/api/pizzas/deletepizza', { pizzaid })
+    const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
+    const response = await api.post('/api/pizzas/deletepizza', { pizzaid }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     toast.success('Pizza stearsa cu succes!', {
       position: toast.POSITION.BOTTOM_CENTER // Set the toast position to bottom-center
     })
