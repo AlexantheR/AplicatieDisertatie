@@ -4,6 +4,7 @@ const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer');
 const { authenticateToken } = require('../middleware/authMiddleware');
+const jwt = require('jsonwebtoken'); 
 
 
 router.get('/checkemail', async (req, res) => {
