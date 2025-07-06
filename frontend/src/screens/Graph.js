@@ -9,6 +9,8 @@ export default function Graph({ orders = [], users = [] }) {
     const [chartData, setChartData] = useState(null);
     const [totalAmount, setTotalAmount] = useState(0);
     const [pieChartData, setPieChartData] = useState(null);
+    const [topProductsData, setTopProductsData] = useState(null);
+
 
     useEffect(() => {
         if (orders.length > 0) {
@@ -18,6 +20,20 @@ export default function Graph({ orders = [], users = [] }) {
             const totalAmount = calculateTotalAmount(monthlySoldItems);
             setChartData({ data: chartData, options: options });
             setTotalAmount(totalAmount);
+
+            const topProducts = calculateTopProducts(orders);
+            setTopProductsData({
+                labels: topProducts.labels,
+                datasets: [
+                    {
+                        label: 'Cele mai comandate produse',
+                        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        data: topProducts.data,
+                    },
+                ],
+            });
         }
     }, [orders]);
 
@@ -154,6 +170,29 @@ export default function Graph({ orders = [], users = [] }) {
         return totalAmount;
     };
 
+    const calculateTopProducts = (orders) => {
+        const productCount = {};
+
+        orders.forEach((order) => {
+            order.orderItems.forEach((item) => {
+                if (productCount[item.name]) {
+                    productCount[item.name] += item.quantity;
+                } else {
+                    productCount[item.name] = item.quantity;
+                }
+            });
+        });
+
+        const sortedProducts = Object.entries(productCount)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5); // top 5
+
+        return {
+            labels: sortedProducts.map(p => p[0]),
+            data: sortedProducts.map(p => p[1]),
+        };
+    };
+
     const calculateClientType = (users) => {
         let premiumClients = 0;
         let nonPremiumClients = 0;
@@ -213,6 +252,24 @@ export default function Graph({ orders = [], users = [] }) {
                     />
                 )}
             </div>
+            {topProductsData && (
+                <div className="top-products-chart">
+                    <h4 className="text-center mt-4">Top 5 Produse Comandate</h4>
+                    <Bar
+                        data={topProductsData}
+                        options={{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { precision: 0 }
+                                }
+                            }
+                        }}
+                    />
+                </div>
+            )}
         </div>
     );
 }

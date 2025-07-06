@@ -33,10 +33,6 @@ app.get("/", (req, res) => {
     res.send("Server working" + port);
 })
 
-const path = require('path');
-app.use('/images', express.static(path.join(__dirname, 'images')));
-
-
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {

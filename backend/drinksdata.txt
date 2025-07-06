@@ -11,14 +11,12 @@
  "category":"Apa",
  "image":"https://purepng.com/public/uploads/large/purepng.com-ice-water-bottle-aquafinabottle-water-drink-aquafina-9415246348499t1u0.png"
 },{
-
+/*
  "name":"Coca-Cola 330ml",
  "prices": [8],
  "category":"Racoritoare",
- "image":"/images/coca-cola-regular.jpg"
-}
-
-,{
+ "image":"https://www.citypng.com/public/uploads/preview/hd-cold-plastic-coca-cola-bottle-png-704081695126432a0745jhbea.png?v=2025070122"
+},{
 
  "name":"Coca-Cola Zero 330ml",
  "prices": [8],
