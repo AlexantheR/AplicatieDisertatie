@@ -2,8 +2,10 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+    baseURL: process.env.REACT_APP_API_URL,
 });
+
+const token = getState().loginUserReducer.currentUser.token;
 
 
 export const placeOrderCard = (token, subtotal) => async (dispatch, getState) => {
@@ -12,12 +14,18 @@ export const placeOrderCard = (token, subtotal) => async (dispatch, getState) =>
     const cartItems = getState().cartReducer.cartItems;
 
     try {
-        const response = await axios.post('/api/orders/placeorder/card', {
+        const tokenJWT = currentUser.token;
+        const response = await api.post('/api/orders/placeorder/card', {
             token,
             subtotal,
             currentUser,
             cartItems,
+        }, {
+            headers: {
+                Authorization: `Bearer ${tokenJWT}`
+            }
         });
+
 
         dispatch({ type: 'PLACE_ORDER_SUCCESS' });
         console.log(response);
@@ -39,12 +47,18 @@ export const placeOrderRamburs = (orderDetails) => async (dispatch, getState) =>
 
     try {
         // const response = await axios.post('/api/orders/placeorder/cash', {
+        const tokenJWT = currentUser.token;
         const response = await api.post('/api/orders/placeorder/cash', {
             token: orderDetails.token,
             subtotal: orderDetails.subtotal,
-            currentUser: currentUser,
-            cartItems: cartItems,
+            currentUser,
+            cartItems,
+        }, {
+            headers: {
+                Authorization: `Bearer ${tokenJWT}`
+            }
         });
+
 
         dispatch({ type: 'PLACE_ORDER_SUCCESS' });
         console.log(response);
@@ -86,7 +100,12 @@ export const getUserOrders = () => async (dispatch, getState) => {
 
     try {
         // const response = await axios.post("/api/orders/getuserorders", { userid: currentUser._id });
-        const response = await api.post("/api/orders/getuserorders", { userid: currentUser._id });
+        const tokenJWT = currentUser.token;
+        const response = await api.post("/api/orders/getuserorders", { userid: currentUser._id }, {
+            headers: {
+                Authorization: `Bearer ${tokenJWT}`
+            }
+        });
 
         console.log(response);
 
@@ -102,7 +121,12 @@ export const getAllOrders = () => async (dispatch, getState) => {
 
     try {
         // const response = await axios.get('/api/orders/getallorders')
-        const response = await api.get('/api/orders/getallorders')
+        const tokenJWT = currentUser.token;
+        const response = await api.get('/api/orders/getallorders', {
+            headers: {
+                Authorization: `Bearer ${tokenJWT}`
+            }
+        });
         console.log(response)
         dispatch({ type: 'GET_ALLORDERS_SUCCESS', payload: response.data })
     } catch (error) {
@@ -115,7 +139,12 @@ export const deliverOrder = (orderid) => async dispatch => {
 
     try {
         // const response = await axios.post('/api/orders/deliverorder', { orderid })
-        const response = await api.post('/api/orders/deliverorder', { orderid })
+        const tokenJWT = getState().loginUserReducer.currentUser.token;
+        const response = await api.post('/api/orders/deliverorder', { orderid }, {
+            headers: {
+                Authorization: `Bearer ${tokenJWT}`
+            }
+        });
         console.log(response)
         toast.success('Comanda trimisa', {
             position: toast.POSITION.BOTTOM_CENTER // Set the toast position to bottom-center
@@ -132,7 +161,12 @@ export const deliverOrder = (orderid) => async dispatch => {
 export const cancelOrder = (orderid) => async (dispatch) => {
     try {
         // const response = await axios.post('/api/orders/cancelorder', { orderid });
-        const response = await api.post('/api/orders/cancelorder', { orderid });
+        const tokenJWT = getState().loginUserReducer.currentUser.token;
+        const response = await api.post('/api/orders/cancelorder', { orderid }, {
+            headers: {
+                Authorization: `Bearer ${tokenJWT}`
+            }
+        });
         console.log(response);
         toast.success('Comanda anulata', {
             position: toast.POSITION.BOTTOM_CENTER // Set the toast position to bottom-center

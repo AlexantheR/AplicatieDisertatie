@@ -67,7 +67,13 @@ export const getAllUsers = () => async dispatch => {
 
     try {
         // const response = await axios.get('/api/users/getallusers')
-        const response = await api.get('/api/users/getallusers')
+        const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
+        const response = await api.get('/api/users/getallusers', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         console.log(response);
         dispatch({ type: 'GET_USERS_SUCCESS', payload: response.data })
 
@@ -81,7 +87,13 @@ export const deleteUser = (userid) => async dispatch => {
 
     try {
         // await axios.post('/api/users/deleteuser', { userid })
-        await api.post('/api/users/deleteuser', { userid })
+        const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
+        await api.post('/api/users/deleteuser', { userid }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         alert('Utilizator sters cu succes!')
         window.location.reload()
     } catch (error) {
@@ -96,7 +108,13 @@ export const makeUserPremium = (email) => async (dispatch) => {
 
     try {
         // const response = await axios.post('/api/users/makeuserpremium', { email });
-        const response = await api.post('/api/users/makeuserpremium', { email });
+        const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
+        const response = await api.post('/api/users/makeuserpremium', { email }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         console.log(response);
         dispatch({ type: 'MAKE_USER_PREMIUM_SUCCESS', payload: response.data });
 
@@ -124,7 +142,13 @@ export const loseUserPremium = (email) => async (dispatch) => {
 
     try {
         // const response = await axios.post('/api/users/loseuserpremium', { email });
-        const response = await api.post('/api/users/loseuserpremium', { email });
+        const token = JSON.parse(localStorage.getItem('currentUser'))?.token;
+
+        const response = await api.post('/api/users/loseuserpremium', { email }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         console.log(response);
         dispatch({ type: 'LOSE_USER_PREMIUM_SUCCESS', payload: response.data });
 
