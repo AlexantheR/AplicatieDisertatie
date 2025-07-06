@@ -138,14 +138,23 @@ export default function Graph({ orders = [], users = [] }) {
     const calculateOrdersPerClient = (orders) => {
         const clientOrders = {};
 
-        orders.forEach(order => {
-            const email = order.currentUser?.email || 'Necunoscut';
-            clientOrders[email] = (clientOrders[email] || 0) + 1;
+        orders.forEach((order) => {
+            const email = order.user?.email;
+            if (email) {
+                clientOrders[email] = (clientOrders[email] || 0) + 1;
+            }
         });
 
-        const sorted = Object.entries(clientOrders).sort((a, b) => b[1] - a[1]).slice(0, 5);
-        return { labels: sorted.map(([email]) => email), data: sorted.map(([, count]) => Math.round(count)) };
+        const sorted = Object.entries(clientOrders)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5); 
+
+        return {
+            labels: sorted.map(entry => entry[0]),
+            data: sorted.map(entry => entry[1]),
+        };
     };
+
 
     const calculateClientType = (users) => {
         let premium = 0, nonPremium = 0;
