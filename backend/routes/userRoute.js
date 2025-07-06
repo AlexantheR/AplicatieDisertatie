@@ -60,6 +60,7 @@ router.post('/login', async (req, res) => {
                     email: user.email,
                     isAdmin: user.isAdmin,
                     isPremium: user.isPremium,
+                    _id: user._id,
                     token: token
                 };
 
