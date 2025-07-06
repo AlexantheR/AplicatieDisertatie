@@ -15,7 +15,7 @@
  "name":"Coca-Cola 330ml",
  "prices": [8],
  "category":"Racoritoare",
- "image":"https://p7.hiclipart.com/preview/1019/539/615/coca-cola-zero-soft-drink-diet-coke-coca-cola.jpg"
+ "image":"https://www.citypng.com/public/uploads/preview/hd-cold-plastic-coca-cola-bottle-png-704081695126432a0745jhbea.png?v=2025070122"
 },{
 
  "name":"Coca-Cola Zero 330ml",
