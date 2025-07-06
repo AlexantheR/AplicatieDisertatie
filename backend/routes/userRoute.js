@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
             const isPasswordMatched = await bcrypt.compare(password, user.password);
             if (isPasswordMatched) {
                 const token = jwt.sign(
-                    { id: user._id, email: user.email, isAdmin: user.isAdmin },
+                    { id: user._id, email: user.email, isAdmin: user.isAdmin, isPremium: user.isPremium },
                     process.env.JWT_SECRET,
                     { expiresIn: '2h' }
                 );
@@ -59,6 +59,7 @@ router.post('/login', async (req, res) => {
                     name: user.name,
                     email: user.email,
                     isAdmin: user.isAdmin,
+                    isPremium: user.isPremium,
                     token: token
                 };
 
