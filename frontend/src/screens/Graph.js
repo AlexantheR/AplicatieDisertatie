@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Bar, Pie, Line } from 'react-chartjs-2';
 import {
@@ -152,9 +153,54 @@ export default function Graph({ orders = [], users = [] }) {
         });
     };
 
+    const exportToCSV = () => {
+        const headers = ['Tip Grafic', 'Eticheta', 'Valoare'];
+        const rows = [];
+
+        if (monthlyChartData) {
+            monthlyChartData.data.labels.forEach((label, index) => {
+                rows.push(['Comenzi lunare', label, monthlyChartData.data.datasets[0].data[index]]);
+            });
+        }
+
+        if (topProductsData) {
+            topProductsData.labels.forEach((label, index) => {
+                rows.push(['Top produse', label, topProductsData.datasets[0].data[index]]);
+            });
+        }
+
+        if (ordersPerClientData) {
+            ordersPerClientData.labels.forEach((label, index) => {
+                rows.push(['Comenzi per client', label, ordersPerClientData.datasets[0].data[index]]);
+            });
+        }
+
+        if (pieChartData) {
+            pieChartData.labels.forEach((label, index) => {
+                rows.push(['Distribuție clienți', label, pieChartData.datasets[0].data[index]]);
+            });
+        }
+
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(e => e.join(',')),
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute('download', 'dashboard_data.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     return (
         <div>
             {totalAmount > 0 && <h3 className="total-comenzi">Total comenzi: {totalAmount.toFixed(2)} RON</h3>}
+            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                <button onClick={exportToCSV} className="btn btn-primary">Exportă datele în CSV</button>
+            </div>
             <div className="dashboard-grid">
                 <div className="chart-box">
                     <h4 className="text-center">Comenzi lunare</h4>
