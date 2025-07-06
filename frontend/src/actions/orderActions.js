@@ -5,7 +5,6 @@ const api = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
 });
 
-const token = getState().loginUserReducer.currentUser.token;
 
 
 export const placeOrderCard = (token, subtotal) => async (dispatch, getState) => {

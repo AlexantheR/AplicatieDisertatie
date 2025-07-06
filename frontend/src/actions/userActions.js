@@ -3,6 +3,7 @@ import api from "../axiosInstance";
 // const api = axios.create({
 //   baseURL: process.env.REACT_APP_API_URL,
 // });
+import { toast } from 'react-toastify';
 
 
 export const checkEmailAvailability = (email) => async (dispatch) => {
@@ -23,19 +24,32 @@ export const checkEmailAvailability = (email) => async (dispatch) => {
 };
 
 
-export const registerUser = (user) => async dispatch => {
 
-    dispatch({ type: 'USER_REGISTER_REQUEST' })
+export const registerUser = (user) => async (dispatch) => {
+    dispatch({ type: 'USER_REGISTER_REQUEST' });
 
     try {
-        // const response = axios.post('/api/users/register', user)
-        const response = await api.post('/api/users/register', user)
-        console.log(response)
-        dispatch({ type: 'USER_REGISTER_SUCCESS' })
+        const response = await api.post('/api/users/register', user);
+
+        if (response.status === 200 && response.data) {
+            dispatch({ type: 'USER_REGISTER_SUCCESS' });
+            toast.success('Cont creat cu succes!', {
+                position: toast.POSITION.BOTTOM_CENTER,
+            });
+            window.location.href = '/login';
+        } else {
+            throw new Error('Crearea contului a eșuat.');
+        }
     } catch (error) {
-        dispatch({ type: 'USER_REGISTER_FAILED', payload: error })
+        dispatch({ type: 'USER_REGISTER_FAILED', payload: error });
+
+        toast.error(
+            error?.response?.data?.message || 'Eroare la înregistrare',
+            { position: toast.POSITION.BOTTOM_CENTER }
+        );
     }
-}
+};
+
 
 
 export const loginUser = (user) => async dispatch => {

@@ -19,24 +19,24 @@ router.get('/checkemail', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-    const { name, email, password } = req.body;
+  const { name, email, password } = req.body;
 
-    try {
-        // Check if the email already exists in the database
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: 'Adresa de email exista deja.' });
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ name, email, password: hashedPassword });
-        await newUser.save();
-
-        res.send(newUser);
-    } catch (error) {
-        return res.status(400).json({ message: error });
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Adresa de email exista deja.' });
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ name, email, password: hashedPassword });
+    await newUser.save();
+
+    res.status(200).json(newUser);  // ✅ Key line
+  } catch (error) {
+    return res.status(400).json({ message: error.message || 'Eroare la înregistrare.' });
+  }
 });
+
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
