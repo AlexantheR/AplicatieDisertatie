@@ -132,48 +132,59 @@ export const getAllOrders = () => async (dispatch, getState) => {
 }
 
 
-export const deliverOrder = (orderid) => async dispatch => {
+export const deliverOrder = (orderid) => async (dispatch, getState) => {
+  try {
+    const tokenJWT = getState().loginUserReducer.currentUser.token;
 
-    try {
-        // const response = await axios.post('/api/orders/deliverorder', { orderid })
-        const tokenJWT = getState().loginUserReducer.currentUser.token;
-        const response = await api.post('/api/orders/deliverorder', { orderid }, {
-            headers: {
-                Authorization: `Bearer ${tokenJWT}`
-            }
-        });
-        console.log(response)
-        toast.success('Comanda trimisa', {
-            position: toast.POSITION.BOTTOM_CENTER // Set the toast position to bottom-center
-        })
+    const response = await api.post('/api/orders/deliverorder', { orderid }, {
+      headers: {
+        Authorization: `Bearer ${tokenJWT}`
+      }
+    });
 
-        // const orders = await axios.get('/api/orders/getallorders')
-        const orders = await api.get('/api/orders/getallorders')
-        dispatch({ type: 'GET_ALLORDERS_SUCCESS', payload: orders.data })
-    } catch (error) {
-        console.log(error)
-    }
-}
+    console.log(response);
+    toast.success('Comanda trimisa', {
+      position: toast.POSITION.BOTTOM_CENTER
+    });
 
-export const cancelOrder = (orderid) => async (dispatch) => {
-    try {
-        // const response = await axios.post('/api/orders/cancelorder', { orderid });
-        const tokenJWT = getState().loginUserReducer.currentUser.token;
-        const response = await api.post('/api/orders/cancelorder', { orderid }, {
-            headers: {
-                Authorization: `Bearer ${tokenJWT}`
-            }
-        });
-        console.log(response);
-        toast.success('Comanda anulata', {
-            position: toast.POSITION.BOTTOM_CENTER // Set the toast position to bottom-center
-        });
+    const orders = await api.get('/api/orders/getallorders', {
+      headers: {
+        Authorization: `Bearer ${tokenJWT}`
+      }
+    });
 
-        // const orders = await axios.get('/api/orders/getallorders');
-        const orders = await api.get('/api/orders/getallorders');
-        dispatch({ type: 'GET_ALLORDERS_SUCCESS', payload: orders.data });
-    } catch (error) {
-        console.log(error);
-    }
+    dispatch({ type: 'GET_ALLORDERS_SUCCESS', payload: orders.data });
+  } catch (error) {
+    console.log(error);
+  }
 };
+
+
+export const cancelOrder = (orderid) => async (dispatch, getState) => {
+  try {
+    const tokenJWT = getState().loginUserReducer.currentUser.token;
+
+    const response = await api.post('/api/orders/cancelorder', { orderid }, {
+      headers: {
+        Authorization: `Bearer ${tokenJWT}`
+      }
+    });
+
+    console.log(response);
+    toast.success('Comanda anulata', {
+      position: toast.POSITION.BOTTOM_CENTER
+    });
+
+    const orders = await api.get('/api/orders/getallorders', {
+      headers: {
+        Authorization: `Bearer ${tokenJWT}`
+      }
+    });
+
+    dispatch({ type: 'GET_ALLORDERS_SUCCESS', payload: orders.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
