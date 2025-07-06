@@ -177,7 +177,7 @@ export default function Graph({ orders = [], users = [] }) {
 
         if (pieChartData) {
             pieChartData.labels.forEach((label, index) => {
-                rows.push(['Distribuție clienți', label, pieChartData.datasets[0].data[index]]);
+                rows.push(['Distributie clienti', label, pieChartData.datasets[0].data[index]]);
             });
         }
 
