@@ -57,6 +57,7 @@ router.post('/login', async (req, res) => {
                 const currentUser = {
                     name: user.name,
                     email: user.email,
+                    isAdmin: user.isAdmin,
                     token: token
                 };
 
