@@ -5,8 +5,6 @@ const api = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
 });
 
-
-
 export const placeOrderCard = (token, subtotal) => async (dispatch, getState) => {
     dispatch({ type: 'PLACE_ORDER_REQUEST' });
     const currentUser = getState().loginUserReducer.currentUser;
